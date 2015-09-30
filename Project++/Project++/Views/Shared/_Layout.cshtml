@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body style="padding-top: 5px">
+    <div class="ui top attached menu">
+        <a class="active item" href="/" >Home</a>
+        <a class="item" href="/Home/About" >About</a>
+        <a class="item" href="/Home/Contact">Contact</a>
+        <a class="item">Colin</a>
+        <a class="item">David</a>
+        <a class="item">Scott</a>
+        <a class="item">Tyler</a>
+        <a class="item">Geoff</a>
+        <a class="item">Alex</a>
+        <a class="item">Jordan</a>
+    </div>
+    <div>
+        <span>&nbsp;</span>
+    </div>
+    <div class="ui grid">
+        <div class="one wide column"></div>
+        <div class="fourteen wide column">@RenderBody()</div>
+        <div class="one wide column"></div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/semantic")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
