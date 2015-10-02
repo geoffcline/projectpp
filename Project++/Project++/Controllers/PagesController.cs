@@ -8,8 +8,8 @@ namespace Project__.Controllers
 {
     public class PagesController : Controller
     {
-        
-        
+
+
         public ActionResult Index()
         {
             return View();
@@ -17,10 +17,14 @@ namespace Project__.Controllers
 
         public ActionResult Colin()
         {
-            
+
             return View();
         }
         public ActionResult Login()
+        {
+            return View();
+        }
+        public ActionResult ManageGroups()
         {
             return View();
         }

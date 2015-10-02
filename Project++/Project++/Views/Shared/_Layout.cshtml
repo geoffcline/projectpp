@@ -1,10 +1,21 @@
-﻿<!DOCTYPE html>
+﻿<script type="text/javascript">
+    function menuchange(i) {
+        $('#tab' + i).removeClass('item');
+        $('#tab' + i).addClass('active item');
+    };
+</script>
+
+<style type="text/css">
+    
+</style>
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/semantic.min.css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -13,16 +24,11 @@
         <div class="one wide column"></div>
         <div class="fourteen wide column">
             <div class="ui top attached inverted teal menu">
-                <a class="active item" href="/">Home</a>
-                <a class="item" href="/Home/About">About</a>
-                <a class="item" href="/Home/Contact">Contact</a>
-                <a class="item" href="/Pages/Colin">Colin</a>
-                <a class="item">David</a>
-                <a class="item">Scott</a>
-                <a class="item">Tyler</a>
-                <a class="item">Geoff</a>
-                <a class="item">Alex</a>
-                <a class="ui right item" href="/Pages/Login">Login</a>
+                <a id="tab1" class="item" onclick="menuchange(1)" href="/">Dashboard</a>
+                <a id="tab2" class="item" onclick="menuchange(2)" href="/Home/About">About</a>
+                <a id="tab3" class="item" href="/Home/Contact">Contact</a>
+                <a class="item" href="/Pages/Colin">Manage Groups</a>
+                <a class="ui right item" href="/Pages/Login">Sign In</a>
             </div>
         </div>
         <div class="one wide column"></div>
@@ -35,9 +41,10 @@
         <div class="fourteen wide column">@RenderBody()</div>
         <div class="one wide column"></div>
     </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/semantic")
+    
+    @Scripts.Render("~/Scripts/jquery-1.10.2.min.js")
+    @Scripts.Render("~/Scripts/semantic.min.js")
     @RenderSection("scripts", required: false)
 </body>
+
 </html>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Project__.Models;
 
 namespace Project__.Controllers
 {
@@ -10,14 +11,17 @@ namespace Project__.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var model = new Models.Index();
+            model.i = 5;
+            return View(model);
         }
 
         public ActionResult About()
         {
+            var model = new Models.About();
             ViewBag.Message = "Your application description page.";
 
-            return View();
+            return View(model);
         }
 
         public ActionResult Contact()
