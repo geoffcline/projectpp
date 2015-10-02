@@ -5,9 +5,6 @@
     };
 </script>
 
-<style type="text/css">
-    
-</style>
 
 <!DOCTYPE html>
 <html>
@@ -15,11 +12,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/semantic.min.css")
+    @Styles.Render("~/Content/css/semantic.min.css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css/jquery-ui.min.css")
 
 </head>
 <body style="padding-top: 5px">
+    @Scripts.Render("~/Scripts/jquery-1.10.2.min.js")
+    @Scripts.Render("~/Scripts/semantic.min.js")
+    @Scripts.Render("~/Scripts/jquery-ui.min.js")
+    @RenderSection("scripts", required: false)
     <div class="ui grid">
         <div class="one wide column"></div>
         <div class="fourteen wide column">
@@ -27,7 +29,14 @@
                 <a id="tab1" class="item" onclick="menuchange(1)" href="/">Dashboard</a>
                 <a id="tab2" class="item" onclick="menuchange(2)" href="/Home/About">About</a>
                 <a id="tab3" class="item" href="/Home/Contact">Contact</a>
-                <a class="item" href="/Pages/Colin">Manage Groups</a>
+                <div class="ui dropdown item">
+                    Groups
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item" href="/Pages/ManageGroup">Manage Group</a>
+                        <a class="item" href="/Pages/CreateGroup">Create Group</a> 
+                    </div>
+                </div>
                 <a class="ui right item" href="/Pages/Login">Sign In</a>
             </div>
         </div>
@@ -42,9 +51,13 @@
         <div class="one wide column"></div>
     </div>
     
-    @Scripts.Render("~/Scripts/jquery-1.10.2.min.js")
-    @Scripts.Render("~/Scripts/semantic.min.js")
-    @RenderSection("scripts", required: false)
+   
 </body>
 
 </html>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.ui.dropdown.item').dropdown();
+    });
+</script>

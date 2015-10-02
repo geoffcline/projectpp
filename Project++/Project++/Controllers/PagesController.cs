@@ -28,5 +28,9 @@ namespace Project__.Controllers
         {
             return View();
         }
+        public ActionResult CreateGroup()
+        {
+            return PartialView("CreateGroup");
+        }
     }
 }

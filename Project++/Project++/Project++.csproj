@@ -183,13 +183,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\person-placeholder.jpg" />
-    <Content Include="Content\semantic.css" />
-    <Content Include="Content\semantic.min.css" />
+    <Content Include="Content\css\semantic.css" />
+    <Content Include="Content\css\semantic.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\icons.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\css\Site.css" />
     <Content Include="fonts\icons.eot" />
     <Content Include="fonts\icons.ttf" />
     <Content Include="fonts\icons.woff" />
@@ -199,6 +199,14 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Content\css\jquery-ui.css" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Content\css\jquery-ui.min.css" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Content\css\jquery-ui.structure.css" />
+    <Content Include="Content\css\jquery-ui.structure.min.css" />
+    <Content Include="Content\css\jquery-ui.theme.css" />
+    <Content Include="Content\css\jquery-ui.theme.min.css" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -246,6 +254,8 @@
     <Content Include="Views\Pages\Colin.cshtml" />
     <Content Include="Views\Pages\Login.cshtml" />
     <Content Include="Views\Pages\ManageGroup.cshtml" />
+    <Content Include="Views\Pages\CreateGroup.cshtml" />
+    <Content Include="Views\Shared\Scripts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
