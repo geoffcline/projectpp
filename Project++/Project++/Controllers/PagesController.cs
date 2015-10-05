@@ -30,7 +30,7 @@ namespace Project__.Controllers
         }
         public ActionResult CreateGroup()
         {
-            return PartialView("CreateGroup");
+            return View();
         }
     }
 }
