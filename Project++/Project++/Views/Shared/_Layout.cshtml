@@ -1,7 +1,6 @@
 ﻿<script type="text/javascript">
     function menuchange(i) {
-        $('#tab' + i).removeClass('item');
-        $('#tab' + i).addClass('active item');
+        $('#tab' + i).addClass('active');
     };
 </script>
 
@@ -15,20 +14,21 @@
     @Styles.Render("~/Content/css/semantic.min.css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/css/jquery-ui.min.css")
+    @Styles.Render("~/Content/css/fullcalendar.css")
 
 </head>
 <body style="padding-top: 5px">
     @Scripts.Render("~/Scripts/jquery-1.10.2.min.js")
     @Scripts.Render("~/Scripts/semantic.min.js")
     @Scripts.Render("~/Scripts/jquery-ui.min.js")
+    @Scripts.Render("~/Scripts/moment.min.js")
+    @Scripts.Render("~/Scripts/fullcalendar.js")
     @RenderSection("scripts", required: false)
     <div class="ui grid">
         <div class="one wide column"></div>
         <div class="fourteen wide column">
             <div class="ui top attached inverted teal menu">
-                <a id="tab1" class="item" onclick="menuchange(1)" href="/">Dashboard</a>
-                <a id="tab2" class="item" onclick="menuchange(2)" href="/Home/About">About</a>
-                <a id="tab3" class="item" href="/Home/Contact">Contact</a>
+                <a id="tab1" class="item" href="/">Dashboard</a>
                 <div class="ui dropdown item">
                     Groups
                     <i class="dropdown icon"></i>
@@ -37,7 +37,7 @@
                         <a class="item" href="/Pages/CreateGroup">Create Group</a> 
                     </div>
                 </div>
-                <a class="ui right item" href="/Pages/Login">Sign In</a>
+                <a id="tab6" class="ui right item" href="/Pages/Login">Sign In</a>
             </div>
         </div>
         <div class="one wide column"></div>

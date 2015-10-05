@@ -15,25 +15,5 @@ namespace Project__.Controllers
             model.i = 5;
             return View(model);
         }
-
-        public ActionResult About()
-        {
-            var model = new Models.About();
-            ViewBag.Message = "Your application description page.";
-
-            return View(model);
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
-        public ActionResult Colin()
-        {
-            return View();
-        }
     }
 }
