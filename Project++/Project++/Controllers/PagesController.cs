@@ -8,8 +8,15 @@ namespace Project__.Controllers
 {
     public class PagesController : Controller
     {
-        
-        public ActionResult Index()
+        public ActionResult Login()
+        {
+            return View();
+        }
+        public ActionResult ManageGroup()
+        {
+            return View();
+        }
+        public ActionResult CreateGroup()
         {
             return View();
         }
