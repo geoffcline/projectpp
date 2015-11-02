@@ -20,5 +20,9 @@ namespace Project__.Controllers
         {
             return View();
         }
+        public ActionResult Algebra()
+        {
+            return View();
+        }
     }
 }
