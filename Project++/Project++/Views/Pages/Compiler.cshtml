@@ -1,0 +1,69 @@
+﻿@using Project__.Models;
+@using Project__.Controllers;
+
+@{ 
+   
+}
+
+<script type="text/javascript">
+    function Translate() {
+        var text = $('#sql').val();
+        if (text == 'SELECT S.sname FROM Sailors AS S, Reserves AS R WHERE S.sid=R.sid AND R.bid=103')
+        {
+            algebra.value = '';
+        } else {
+            algebra.value = 'wrong';
+        }
+    };
+</script>
+
+
+
+<div class="ui grid">
+    <div class="six wide column">
+        <div class="ui segment">
+            <h3>Schemas</h3> 
+                <div class="ui input">
+                <input type="text" value="Sailors(sid:integer, sname:string, rating:integer, age:real)" size="50"/>
+            </div>
+            <div>&nbsp;</div>
+            <div class="ui input">
+                <input type="text" value="Boats(big:integer, bname:string, color:string)" size="50" />
+                
+            </div>
+            <div>&nbsp;</div>
+            <div class="ui input">
+                <input type="text" value="Reserves(sid:integer, bid:integer, day:date)" size="50" />
+            </div>
+        </div>
+    </div>
+    <div class="ten wide column">
+        <div class="ui segment">
+           <form class="ui form" name="sqlform" id="sqlform">
+               <div class="field">
+                   <h3>SQL</h3>
+                   <textarea id="sql" name="sql" value=""></textarea>
+               </div>
+               <div class="ui orange submit button" onclick="Translate()">Translate</div>
+           </form>
+            <br />
+           <form class="ui form" name="algebrafrom" id="algebraform">
+               <div class="field">
+                   <h3>Relational Algebra</h3>
+                   <textarea id="algebra" name="algebra" value=""></textarea>
+               </div>
+               <div class="ui orange submit button">Build Tree</div>
+           </form>
+            <br />
+        </div>
+    </div>
+</div>
+<div class="ui grid">
+    <div class="sixteen wide column">
+        <div class="ui segment">
+            <h3>Query Tree</h3>
+
+            
+        </div>
+    </div>
+</div>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Project__.Models;
 
 namespace Project__.Controllers
 {
@@ -20,9 +21,18 @@ namespace Project__.Controllers
         {
             return View();
         }
-        public ActionResult Algebra()
+        public ActionResult Compiler()
         {
-            return View();
+            var model = new Models.Strings();
+
+            
+
+            return View(model);
+        }
+        public int TranslateSql(int test)
+        {
+            int variable = test;
+            return variable;
         }
     }
 }
