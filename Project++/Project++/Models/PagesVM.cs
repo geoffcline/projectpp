@@ -19,6 +19,6 @@ namespace Project__.Models
     {
         public PlusPlusContext() : base("name=PlusPlus") { }
 
-        public DbSet<UsersVM> Rooms { get; set; }
+        public DbSet<UsersVM> Users { get; set; }
     }
 }
