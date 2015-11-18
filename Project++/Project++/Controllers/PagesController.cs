@@ -26,5 +26,10 @@ namespace Project__.Controllers
         {
             return View();
         }
+
+        public ActionResult geoff1()
+        {
+            return View();
+        }
     }
 }
