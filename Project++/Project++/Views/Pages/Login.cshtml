@@ -1,42 +1,57 @@
-﻿
+﻿<script type="text/javascript">
+    function Register() {
+        var params = '';
+        params += $('#registerform').serialize();
+        jQuery.ajax({
+            url: '@Url.Action("RegisterUser")',
+            method: 'POST',
+            data: params
+        });
+    };
+
+</script>
+
+
 
 <div class="ui two column grid">
     <div class="column">
         <div class="ui raised teal segment">
-            <div class="ui grid">
-                <div class="ten wide column">
-                    <div>
-                        <h3>Register</h3>
-                    </div>
-                    <div class="ui sixteen wide column">
-                        <div class="ui input">
-                            <input placeholder="Name" type="text" size="40" style="margin-top: 5px; margin-right: 5px" />
+            <form name="registerform" id="registerform">
+                <div class="ui grid">
+                    <div class="ten wide column">
+                        <div>
+                            <h3>Register</h3>
+                        </div>
+                        <div class="ui sixteen wide column">
+                            <div class="ui input">
+                                <input name="name" placeholder="Name" type="text" size="40" style="margin-top: 5px; margin-right: 5px" value=""/>
+                            </div>
+                        </div>
+                        <div class="sixteen wide column">
+                            <div class="ui input" style="margin-top: 5px">
+                                <input name="email" placeholder="Email" type="text" size="40" value=""/>
+                            </div>
+                        </div>
+                        <div class="sixteen wide column">
+                            <div class="ui input" style="margin-top: 5px">
+                                <input name="username" placeholder="UserName" type="text" size="40" value="" />
+                            </div>
+                        </div>
+                        <div class="sixteen wide column">
+                            <div class="ui input" style="margin-top: 5px">
+                                <input name="password" placeholder="Password" type="text" size="40" value=""/>
+                            </div>
+                        </div>
+                        <div class="ui orange button" style="margin-top: 5px" onclick="Register()">
+                            Register
                         </div>
                     </div>
-                    <div class="sixteen wide column">
-                        <div class="ui input" style="margin-top: 5px">
-                            <input placeholder="Email" type="text" size="40" />
-                        </div>
-                    </div>
-                    <div class="sixteen wide column">
-                        <div class="ui input" style="margin-top: 5px">
-                            <input placeholder="UserName" type="text" size="40" />
-                        </div>
-                    </div>
-                    <div class="sixteen wide column">
-                        <div class="ui input" style="margin-top: 5px">
-                            <input placeholder="Password" type="text" size="40" />
-                        </div>
-                    </div>
-                    <div class="ui orange button" style="margin-top: 5px">
-                        Register
+                    <div class="six wide column" style="text-align: center">
+                        <img src="~/Content/images/person-placeholder.jpg" style="height: 190px; max-width: 100%"/>
+                        <a style="cursor: pointer">Upload A Photo</a>
                     </div>
                 </div>
-                <div class="six wide column" style="text-align: center">
-                    <img src="~/Content/images/person-placeholder.jpg" style="height: 190px; max-width: 100%"/>
-                    <a style="cursor: pointer">Upload A Photo</a>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
     <div class="column">

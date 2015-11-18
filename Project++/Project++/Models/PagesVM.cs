@@ -6,6 +6,11 @@ namespace Project__.Models
 {
     public class UsersVM
     {
+        public User Users { get; set; }
+    }
+
+    public class User
+    {
         public int UserID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
@@ -19,6 +24,6 @@ namespace Project__.Models
     {
         public PlusPlusContext() : base("name=PlusPlus") { }
 
-        public DbSet<UsersVM> Rooms { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
