@@ -1,4 +1,4 @@
-﻿
+﻿@model Project__.Models.User
 
 <div class="ui grid">
     <div class="four wide column">
@@ -7,7 +7,7 @@
                 <img src="~/Content/images/person-placeholder.jpg" style="max-height: 100%; max-width: 100%;"/>
             </div>
             <div class="content">
-                Colin Eyster
+                @Model.Username
                 <div class="meta">
                     Web Developer
                 </div>
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="ui raised teal segment">
-            Projects
+            Groups
         </div>
     </div>
     <div class="eight wide column">

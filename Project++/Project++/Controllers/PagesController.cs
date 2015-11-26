@@ -14,10 +14,21 @@ namespace Project__.Controllers
         public ActionResult Login()
         {
             var model = new User();
-            model = db.Users.FirstOrDefault(u => u.UserID == 1);
+            int? UserId = (int?)Session["LoginId"];
 
-
+            if (UserId == null)
+            {
+                model = db.Users.FirstOrDefault(u => u.UserID == 1);
+            }else
+            {
+                model = db.Users.FirstOrDefault(u => u.UserID == UserId);
+            }
+            
             return View("Login", model);
+        }
+        public ActionResult Dashboard()
+        {
+            return View();
         }
         public ActionResult ManageGroup()
         {
@@ -45,6 +56,22 @@ namespace Project__.Controllers
 
             db.Users.Add(user);
             db.SaveChanges();
+        }
+
+        public JsonResult ValidateUser(string username, string password)
+        {
+            var User = new User();
+            User = db.Users.FirstOrDefault(u => u.Username == username && u.Password == password);
+
+            if(User != null)
+            {
+                Session["LoginId"] = User.UserID;
+                return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
+               
+            }else
+            {
+                return Json(new { Success = false }, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }
