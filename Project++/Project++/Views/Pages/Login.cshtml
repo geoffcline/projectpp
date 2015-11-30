@@ -1,4 +1,6 @@
-﻿<script type="text/javascript">
+﻿@model Project__.Models.User
+
+<script type="text/javascript">
     function Register() {
         var params = '';
         params += $('#registerform').serialize();
@@ -7,7 +9,33 @@
             method: 'POST',
             data: params
         });
+    }
+
+    $(document).ready(function () {
+        $('#savedata').click(function () {
+            var data = {
+                "username": $("#signin_user").val(),
+                "password": $("#signin_pass").val()
     };
+            $.ajax({
+                url: "/Pages/ValidateUser",
+                type: "POST",
+                data: JSON.stringify(data),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (response) {
+                    if (response.Success) {
+                        window.location.href = "@Url.Action("Index", "Home" )";
+                    }
+                    else
+                        window.alert("Login was unsuccessful");
+                },
+                error: function () {
+                    console.log('Login Fail!!!');
+                }
+            });
+        });
+    });
 
 </script>
 
@@ -17,61 +45,69 @@
     <div class="column">
         <div class="ui raised teal segment">
             <form name="registerform" id="registerform">
-            <div class="ui grid">
-                <div class="ten wide column">
-                    <div>
-                        <h3>Register</h3>
-                    </div>
-                    <div class="ui sixteen wide column">
-                        <div class="ui input">
-                            <input placeholder="Name" type="text" size="40" style="margin-top: 5px; margin-right: 5px" />
+                <div class="ui grid">
+                    <div class="ten wide column">
+                        <div>
+                            <h3>Register</h3>
                         </div>
-                    </div>
-                    <div class="sixteen wide column">
-                        <div class="ui input" style="margin-top: 5px">
+                        <div class="ui sixteen wide column">
+                            <div class="ui input">
+                                <input name="name" placeholder="Name" type="text" size="40" style="margin-top: 5px; margin-right: 5px" value="@Model.FirstName"/>
+                            </div>
+                        </div>
+                        <div class="sixteen wide column">
+                            <div class="ui input" style="margin-top: 5px">
                                 <input name="email" placeholder="Email" type="text" size="40" value=""/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="sixteen wide column">
-                        <div class="ui input" style="margin-top: 5px">
+                        <div class="sixteen wide column">
+                            <div class="ui input" style="margin-top: 5px">
                                 <input name="username" placeholder="UserName" type="text" size="40" value="" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="sixteen wide column">
-                        <div class="ui input" style="margin-top: 5px">
+                        <div class="sixteen wide column">
+                            <div class="ui input" style="margin-top: 5px">
                                 <input name="password" placeholder="Password" type="text" size="40" value=""/>
+                            </div>
+                        </div>
+                        <div class="ui orange button" style="margin-top: 5px" onclick="Register()">
+                            Register
                         </div>
                     </div>
-                        <div class="ui orange button" style="margin-top: 5px" onclick="Register()">
-                        Register
+                    <div class="six wide column" style="text-align: center">
+                        <img src="~/Content/images/person-placeholder.jpg" style="height: 190px; max-width: 100%"/>
+                        <a style="cursor: pointer">Upload A Photo</a>
                     </div>
                 </div>
-                <div class="six wide column" style="text-align: center">
-                    <img src="~/Content/images/person-placeholder.jpg" style="height: 190px; max-width: 100%"/>
-                    <a style="cursor: pointer">Upload A Photo</a>
-                </div>
-            </div>
             </form>
         </div>
     </div>
     <div class="column">
         <div class="ui raised teal segment">
+            <form name="Signinform">
             <div>
                 <h3>Login</h3>
             </div>
             <div class="sixteen wide column">
                 <div class="ui input" style="margin-top: 5px">
-                    <input placeholder="Username" type="text" id="username" name="username" size="40" />
+                        <input placeholder="Username" type="text" id="signin_user" name="signin_user" size="40" value="" />
                 </div>
             </div>
             <div class="sixteen wide column">
                 <div class="ui input" style="margin-top: 5px; margin-bottom: 5px">
-                    <input placeholder="Password" type="text" size="40"/>
+                        <input placeholder="Password" id="signin_pass" name="signin_pass" type="text" size="40" value="" />
                 </div>
             </div>
-            <div class="ui orange button">
+                <div class="ui orange button" typeof="submit" id="savedata">
                 Login
             </div>
+            </form>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        menuchange(6);
+    });
+</script>
