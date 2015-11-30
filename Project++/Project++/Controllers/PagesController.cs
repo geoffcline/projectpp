@@ -46,5 +46,14 @@ namespace Project__.Controllers
             db.Users.Add(user);
             db.SaveChanges();
         }
+        public ActionResult Task()
+        {
+            return View();
+        }
+
+        public ActionResult Settings()
+        {
+            return View();
+        }
     }
 }
