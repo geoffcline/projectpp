@@ -15,8 +15,8 @@ namespace Project__.Controllers
         {
             var model = new User();
             model = db.Users.FirstOrDefault(u => u.UserID == 1);
-            
-            
+
+
             return View("Login", model);
         }
         public ActionResult ManageGroup()
@@ -52,6 +52,10 @@ namespace Project__.Controllers
         }
 
         public ActionResult Settings()
+        {
+            return View();
+        }
+        public ActionResult Calendar()
         {
             return View();
         }
