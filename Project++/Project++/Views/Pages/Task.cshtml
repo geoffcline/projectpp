@@ -1,1 +1,50 @@
-﻿
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        $("#datepicker").datepicker
+        jQuery.ajax({
+            url: '@Url.Action("addtask")',
+            method: 'POST',
+            data: params
+        });
+
+
+    });
+</script>
+<div class=" ui grid">
+    <!-- Add Task Form-->
+    <div class="ui two column grid">
+        <div class="column">
+            <div class="ui raised teal segment">
+                <form name="addtask" id="addtask">
+                    <div class="ui grid">
+                        <div class="ten wide column">
+                            <div>
+                                <h3>Add Task</h3>
+                            </div>
+                            <div class="ui sixteen wide column">
+                                <div class="ui input">
+                                    <input name="name" placeholder="Name" type="text" size="40" style="margin-top: 5px; margin-right: 5px" value="" />
+                                </div>
+                            </div>
+                            <div class="sixteen wide column">
+                                <h4>Due Date</h4>
+                                    <div class="ui icon input">
+                                        <input type="text" id="datepicker" size="32" />
+                                        <i class="calendar icon"></i>
+                                    </div>
+                            </div>
+                            <div class="sixteen wide column">
+                                <h4> Assign to Member</h4>
+                                <div class="ui input" style="margin-top: 5px">
+                                    <input name="member" placeholder="member" type="text" size="40" value="" />
+                                </div>
+                            </div>
+                            <div class="ui orange button" style="margin-top: 5px" onclick="Register()">
+                                Add Task
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
