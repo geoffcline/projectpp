@@ -14,19 +14,8 @@ namespace Project__.Controllers
         public ActionResult Index()
         {
 
-            var model = new User();
-            var assignment = new Assignment();
-            
-            int? UserId = (int)Session["LoginId"];
-
-            if (UserId == null)
-            {
-                model = db.Users.FirstOrDefault(u => u.UserID == 1);
-            }
-            else
-            {
-                model = db.Users.FirstOrDefault(u => u.UserID == UserId);
-            }
+            var model = new UsersVM();
+            model.Group = db.Project.FirstOrDefault(p => p.ProjectID == 2);
 
             return View("Index", model);
         }

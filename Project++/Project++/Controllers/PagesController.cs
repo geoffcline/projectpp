@@ -28,13 +28,29 @@ namespace Project__.Controllers
         }
         public ActionResult Dashboard()
         {
-            return View();
+            var model = new Projects();
+            model = db.Project.FirstOrDefault(p => p.ProjectID == 1);
+
+            return View("Index", model);
         }
         public ActionResult ManageGroup()
         {
             return View();
         }
         public ActionResult CreateGroup()
+        {
+            return View();
+        }
+        public ActionResult Task()
+        {
+            return View();
+        }
+
+        public ActionResult Settings()
+        {
+            return View();
+        }
+        public ActionResult Calendar()
         {
             return View();
         }
@@ -57,7 +73,6 @@ namespace Project__.Controllers
             db.Users.Add(user);
             db.SaveChanges();
         }
-
         public JsonResult ValidateUser(string username, string password)
         {
             var User = new User();
@@ -73,18 +88,27 @@ namespace Project__.Controllers
                 return Json(new { Success = false }, JsonRequestBehavior.AllowGet);
             }
         }
-        public ActionResult Task()
+        public void CreateAGroup()
         {
-            return View();
-        }
+            try
+            {
+                string name = (string.IsNullOrEmpty(Request.Form["groupname"]) ? null : Request.Form["groupname"]);
+                string desc = Request.Form["groupdescription"];
 
-        public ActionResult Settings()
-        {
-            return View();
+                var group = new Projects();
+                group.Name = name;
+                group.Description = desc;
+                group.TeamLeaderID = (int)Session["LoginId"];
+
+                db.Project.Add(group);
+                db.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
-        public ActionResult Calendar()
-        {
-            return View();
-        }
+        
     }
 }

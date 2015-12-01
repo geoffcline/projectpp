@@ -10,7 +10,7 @@ namespace Project__.Models
         public User Users { get; set; }
         public Chat Chat { get; set; }
         public Event Events { get; set; }
-        public Group Group { get; set; }
+        public Projects Group { get; set; }
         public GroupMember GroupMembers { get; set; }
         public Log Log { get; set; }
         public Assignment Taks { get; set; }
@@ -40,6 +40,7 @@ namespace Project__.Models
 
     public class Event
     {
+        [Key]
         public int EventID { get; set; }
         public int GroupID { get; set; }
         public string EventName { get; set; }
@@ -49,9 +50,10 @@ namespace Project__.Models
         public int CreatedByID { get; set; }
     }
 
-    public class Group
+    public class Projects
     {
-        public int GroupID { get; set; }
+        [Key]
+        public int ProjectID { get; set; }
         public string Name { get; set; }
         public int TeamLeaderID { get; set; }
         public string Description { get; set; }
@@ -67,6 +69,7 @@ namespace Project__.Models
 
     public class Log
     {
+        [Key]
         public int LogID { get; set; }
         public DateTime TimeStamp { get; set; }
         public string ActionType { get; set; }
@@ -91,7 +94,7 @@ namespace Project__.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Chat> Chat { get; set; }
         public DbSet<Event> Events { get; set; }
-        public DbSet<Group> Group { get; set; }
+        public DbSet<Projects> Project { get; set; }
         public DbSet<GroupMember> GroupMembers { get; set; }
         public DbSet<Log> Log { get; set; }
         public DbSet<Assignment> Tasks { get; set; }
