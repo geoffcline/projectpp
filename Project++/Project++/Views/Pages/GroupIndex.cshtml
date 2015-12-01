@@ -1,0 +1,68 @@
+﻿<div class="ui grid">
+    <div class="four wide column">
+        <div class="ui card">
+            <div class="image">
+                <img src="~/Content/images/person-placeholder.jpg" style="max-height: 100%; max-width: 100%;" />
+            </div>
+            <div class="content">
+                Group Name
+            </div>
+            <div class="extra content">
+                Group Description
+            </div>
+        </div>
+        <div class="ui card">
+            <div class=" content">
+                Project Title
+            </div>
+            <div class="extra content">
+                Project Description
+            </div>
+        </div>
+        <div class="ui card">
+            <div class="content">
+                Team Members
+            </div>
+            <div class="extra content">
+                Member Names
+            </div>
+        </div>     
+    </div>
+    <div class="eight wide column">
+        <div class="ui teal raised segment">
+            Group Tasks
+        </div>
+        <div class="ui teal raised segment">
+            <div class="ui form">
+                <div class="field">
+                    Group Chat
+                    <textarea></textarea>
+                </div>
+                <div class="field">
+                    New Message
+                    <textarea rows="2"></textarea>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="four wide column">
+        <div class="ui teal raised segment">
+            <div id='calendar'></div>
+        </div>
+        <div class="ui teal raised segment">
+            Group Meetings
+            <div class="ui divider"></div>
+            <p>New Meeting Here</p>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        menuchange(1);
+        $('#calendar').fullCalendar({
+            height: 400
+        });
+    });
+</script>
