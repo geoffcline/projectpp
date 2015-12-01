@@ -1,15 +1,19 @@
 ﻿<script type="text/javascript">
     $(document).ready(function () {
         $("#datepicker").datepicker
+    });
+    function addtask() {
+        var params = '';
+        params += $('#addtask').serialize();
         jQuery.ajax({
             url: '@Url.Action("addtask")',
             method: 'POST',
             data: params
         });
-
-
-    });
+    };
 </script>
+<html>
+<body>
 <div class=" ui grid">
     <!-- Add Task Form-->
     <div class="ui two column grid">
@@ -28,18 +32,19 @@
                             </div>
                             <div class="sixteen wide column">
                                 <h4>Due Date</h4>
-                                    <div class="ui icon input">
-                                        <input type="text" id="datepicker" size="32" />
-                                        <i class="calendar icon"></i>
-                                    </div>
+                                <div class="ui icon input">
+                                    <input type="text" id="datepicker" size="32" />
+                                    <i class="calendar icon"></i>
+                                </div>
                             </div>
                             <div class="sixteen wide column">
+                                <!-- Needs to be a Select Statement Queried for the Group-->
                                 <h4> Assign to Member</h4>
                                 <div class="ui input" style="margin-top: 5px">
                                     <input name="member" placeholder="member" type="text" size="40" value="" />
                                 </div>
                             </div>
-                            <div class="ui orange button" style="margin-top: 5px" onclick="Register()">
+                            <div class="ui orange button" style="margin-top: 5px" onclick="addtask()">
                                 Add Task
                             </div>
                         </div>
@@ -48,3 +53,6 @@
             </div>
         </div>
     </div>
+</div>
+</body>
+</html>
