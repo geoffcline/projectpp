@@ -1,4 +1,5 @@
-﻿
+﻿@model Google.Apis.Drive.v2.Data.FileList
+
 @{
     ViewBag.Title = "Shared Files";
 }
@@ -17,13 +18,16 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Cool Ideas.docx</td>
-                <td>Jordan Williams</td>
-                <td>11/10/2015</td>
-                <td style="text-align:center;"><button class="ui icon button teal"><i class="edit icon" /></button></td>
-                <td style="text-align:center;"><button class="ui icon button teal"><i class="download icon" /></button></td>
-            </tr>
+            @foreach (Google.Apis.Drive.v2.Data.File thing in Model.Items)
+            {
+                <tr>
+                    <td>@thing.Title</td>
+                    <td>@thing.Owners[0].DisplayName</td>
+                    <td>@thing.ModifiedDate</td>
+                    <td style="text-align:center;"><button class="ui icon button teal" onclick="window.open('@thing.AlternateLink')"><i class="edit icon"/></button></td>
+                    <td style="text-align:center;"><button class="ui icon button teal" onclick="location.href='@thing.WebContentLink'"><i class="download icon" /></button></td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
