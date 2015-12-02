@@ -109,6 +109,17 @@ namespace Project__.Controllers
             }
             
         }
+        public void SignOut()
+        {
+            try
+            {
+                Session["LoginId"] = null;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
         
     }
 }
