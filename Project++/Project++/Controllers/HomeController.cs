@@ -15,9 +15,42 @@ namespace Project__.Controllers
         {
 
             var model = new UsersVM();
-            model.Group = db.Project.FirstOrDefault(p => p.ProjectID == 2);
+            int? userId = (int?)Session["LoginId"];
+            model.Group = db.Projects.FirstOrDefault(p => p.ProjectID == 2);
+            model.Users = db.Users.FirstOrDefault(u => u.UserID == userId);
+            model.Chat = db.Chats.ToList();
 
             return View("Index", model);
+        }
+        public ActionResult MessageBox()
+        {
+            var model = new UsersVM();
+            //model.Chat = db.Chat.ToList();
+
+            return PartialView("MessageBox", model);
+        }
+        public void NewMessage()
+        {
+            try
+            {
+                string newmessage = Request.Form["newmessage"];
+
+                var chat = new Chat();
+
+                chat.GroupID = 34;
+                chat.TimeStamp = DateTime.Now;
+                chat.UserId = (int)Session["LoginId"];
+                chat.Message = newmessage;
+
+                db.Chats.Add(chat);
+                db.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
+            
         }
     }
 

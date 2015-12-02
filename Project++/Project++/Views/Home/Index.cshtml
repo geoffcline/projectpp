@@ -1,6 +1,22 @@
 ﻿
 @model Project__.Models.UsersVM
 
+<script type="text/javascript">
+    function Message() {
+        var params = '';
+        params += $('#messageform').serialize();
+        $.ajax({
+            url: '@Url.Action("NewMessage")',
+            method: 'POST',
+            data: params
+
+        });
+    };
+    function MessageBox() {
+        $("#chatbox").load('MessageBox');
+    };
+</script>
+
 <div class="ui grid">
     <div class="four wide column">
         <div class="ui card">
@@ -9,14 +25,11 @@
             </div>
             <div class="content">
                 <div class="meta">
-                    Web Developer
+                    @(Model.Users.FirstName != null ? Model.Users.FirstName : "Blank") @(Model.Users.LastName != null ? Model.Users.LastName : "Blank")
                 </div>
                 <div class="description">
-                    ClubReady, LLC
+                    @Model.Users.Username
                 </div>
-            </div>
-            <div class="extra content">
-                This is a description.
             </div>
         </div>
         <div class="ui raised teal segment">
@@ -29,17 +42,14 @@
             Tasks
         </div>
         <div class="ui teal raised segment">
-            <div class="ui form">
-                <div class="field">
-                    Chat
-                    <textarea></textarea>
+            <form name="messageform" id="messageform">
+                <div id="chatbox"></div>
+                <div class="ui input">
+                    New Message <br />
+                    <input name="newmessage" id="newmessage" rows="2">
                 </div>
-                <div class="field">
-                    New Message
-                    <textarea rows="2"></textarea>
-                </div>
-            </div>
-
+            </form>
+            <div class="ui orange button" style="margin-top: 5px" onclick="Message()">Send</div>
         </div>
     </div>
     <div class="four wide column">

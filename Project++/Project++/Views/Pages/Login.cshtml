@@ -52,20 +52,25 @@
                         </div>
                         <div class="ui sixteen wide column">
                             <div class="ui input">
-                                <input name="name" placeholder="Name" type="text" size="40" style="margin-top: 5px; margin-right: 5px" value="@Model.FirstName"/>
+                                <input name="firstname" placeholder="First Name" type="text" size="40" style="margin-top: 5px; margin-right: 5px" value=""/>
                             </div>
                         </div>
-                        <div class="sixteen wide column">
+                        <div class="ui sixteen wide column">
+                            <div class="ui input">
+                                <input name="lastname" placeholder="Last Name" type="text" size="40" style="margin-top: 5px; margin-right: 5px" value="" />
+                            </div>
+                        </div>
+                        <div class="ui sixteen wide column">
                             <div class="ui input" style="margin-top: 5px">
-                                <input name="email" placeholder="Email" type="text" size="40" value="@Session["LoginId"]"/>
+                                <input name="email" placeholder="Email" type="text" size="40" value=""/>
                             </div>
                         </div>
-                        <div class="sixteen wide column">
+                        <div class="ui sixteen wide column">
                             <div class="ui input" style="margin-top: 5px">
                                 <input name="username" placeholder="UserName" type="text" size="40" value="" />
                             </div>
                         </div>
-                        <div class="sixteen wide column">
+                        <div class="ui sixteen wide column">
                             <div class="ui input" style="margin-top: 5px">
                                 <input name="password" placeholder="Password" type="text" size="40" value=""/>
                             </div>

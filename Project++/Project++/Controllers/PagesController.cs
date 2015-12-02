@@ -29,7 +29,7 @@ namespace Project__.Controllers
         public ActionResult Dashboard()
         {
             var model = new Projects();
-            model = db.Project.FirstOrDefault(p => p.ProjectID == 1);
+            model = db.Projects.FirstOrDefault(p => p.ProjectID == 1);
 
             return View("Index", model);
         }
@@ -57,21 +57,24 @@ namespace Project__.Controllers
 
         public void RegisterUser()
         {
-            var name = (string.IsNullOrEmpty(Request.Form["name"]) ? null : Request.Form["name"]);
+            var firstname = (string.IsNullOrEmpty(Request.Form["firstname"]) ? null : Request.Form["firstname"]);
+            var lastname = (string.IsNullOrEmpty(Request.Form["lastname"]) ? null : Request.Form["lastname"]);
             var email = (string.IsNullOrEmpty(Request.Form["email"]) ? null : Request.Form["email"]);
             var username = (string.IsNullOrEmpty(Request.Form["username"]) ? null : Request.Form["username"]);
             var password = (string.IsNullOrEmpty(Request.Form["password"]) ? null : Request.Form["password"]);
 
             var user = new User();
-            user.FirstName = name;
+            user.FirstName = firstname;
+            user.LastName = lastname;
             user.Email = email;
             user.Username = username;
             user.Password = password;
-            user.LastName = "testing";
-            user.DefaultGroupID = 3;
+            user.DefaultGroupID = null;
 
             db.Users.Add(user);
             db.SaveChanges();
+
+            return;
         }
         public JsonResult ValidateUser(string username, string password)
         {
@@ -100,7 +103,7 @@ namespace Project__.Controllers
                 group.Description = desc;
                 group.TeamLeaderID = (int)Session["LoginId"];
 
-                db.Project.Add(group);
+                db.Projects.Add(group);
                 db.SaveChanges();
             }
             catch(Exception ex)
@@ -119,6 +122,7 @@ namespace Project__.Controllers
             {
                 throw ex;
             }
+            return;
         }
         
     }

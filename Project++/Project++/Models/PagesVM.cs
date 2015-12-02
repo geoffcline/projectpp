@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace Project__.Models
 {
     public class UsersVM
     {
         public User Users { get; set; }
-        public Chat Chat { get; set; }
+        public List<Chat> Chat { get; set; }
         public Event Events { get; set; }
         public Projects Group { get; set; }
         public GroupMember GroupMembers { get; set; }
@@ -26,14 +27,15 @@ namespace Project__.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public int DefaultGroupID { get; set; }
+        public int? DefaultGroupID { get; set; }
     }
 
     public class Chat
     {
         [Key]
-        public int GroupID { get; set; }
-        public DateTime TimeStamp { get; set; }
+        public int ChatID { get; set; }
+        public int? GroupID { get; set; }
+        public DateTime? TimeStamp { get; set; }
         public string Message { get; set; }
         public int UserId { get; set; }
     }
@@ -91,10 +93,11 @@ namespace Project__.Models
     {
         public PlusPlusContext() : base("name=PlusPlus") { }
 
+
         public DbSet<User> Users { get; set; }
-        public DbSet<Chat> Chat { get; set; }
+        public DbSet<Chat> Chats { get; set; }
         public DbSet<Event> Events { get; set; }
-        public DbSet<Projects> Project { get; set; }
+        public DbSet<Projects> Projects { get; set; }
         public DbSet<GroupMember> GroupMembers { get; set; }
         public DbSet<Log> Log { get; set; }
         public DbSet<Assignment> Tasks { get; set; }

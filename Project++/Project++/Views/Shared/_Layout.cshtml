@@ -1,38 +1,8 @@
 ﻿
-
-@{
-    bool logged_in = false;
-    if (Session["Loggin"] != null)
-    { logged_in = true; }
-    else
-    { logged_in = false; }
-
-}
-
 <script type="text/javascript">
     
     function menuchange(i) {
         $('#tab' + i).addClass('active');
-    };
-    function checklogin(login) {
-        if (login) {
-            $("#tab1").show();
-            $("#tab2").show();
-            $("#tab3").show();
-            $("#tab4").show();
-            $("#tab5").hide();
-            $("#tab6").show();
-            $("#sign_out").show();
-        } else {
-            $("#tab1").hide();
-            $("#tab2").hide();
-            $("#tab3").hide();
-            $("#tab4").hide();
-            $("#tab5").show();
-            $("#tab6").hide();
-            $("#sign_out").hide();
-
-        }
     };
     function SignOut() {
         $.ajax({
@@ -68,23 +38,32 @@
         <div class="one wide column"></div>
         <div class="fourteen wide column">
             <div class="ui top attached inverted teal menu">
-                <a id="tab1" class="item" href="/">Dashboard</a>
-                <a id="tab2" class="item" href="/Pages/GroupIndex">Group Dashboard</a>
-                <div class="ui dropdown item">
-                    Groups
-                    <i class="dropdown icon"></i>
-                    <div class="menu">
-                        <a class="item" href="/Pages/ManageGroup">Manage Group</a>
-                        <a class="item" href="/Pages/CreateGroup">Create Group</a> 
-                    </div>
-                </div>
-                <a id="tab3" class="item" href="/Pages/Task">Task</a>
-                <a id="tab4" class="item" href="/Pages/Calendar">Calendar</a>
-                <a id="tab5" class="ui right item" href="/Pages/Login">Sign In</a>
-                <a id="tab6" class="ui right item" href="/Pages/Settings">Settings</a>
-                <div name="sign_out" id="sign_out" class="ui item" onclick="SignOut()" style="@(Session["LoginId"] == null ? null : "display: none")">
-                    <i class="sign out icon"></i>
-                </div>
+                
+                @{
+                    if (Session["LoginId"] == null)
+                    {
+                        <a id="tab5" class="ui right item" href="/Pages/Login">Sign In</a>
+                    }
+                    else
+                    {
+                        <a id="tab1" class="item" href="/">Dashboard</a>
+                        <a id="tab2" class="item" href="/Pages/GroupIndex">Group Dashboard</a>
+                        <div class="ui dropdown item">
+                            Groups
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <a class="item" href="/Pages/ManageGroup">Manage Group</a>
+                                <a class="item" href="/Pages/CreateGroup">Create Group</a>
+                            </div>
+                        </div>
+                        <a id="tab3" class="item" href="/Pages/Task">Task</a>
+                        <a id="tab4" class="item" href="/Pages/Calendar">Calendar</a>
+                        <a id="tab6" class="ui right item" href="/Pages/Settings">Settings</a>
+                        <div name="sign_out" id="sign_out" class="ui item" onclick="SignOut()">
+                            <i class="sign out icon"></i>
+                        </div>
+                    }
+                }
             </div>
         </div>
         <div class="one wide column"></div>
@@ -108,8 +87,6 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        var login = "@logged_in";
         $('.ui.dropdown.item').dropdown();
-        checklogin(login);
     });
 </script>
