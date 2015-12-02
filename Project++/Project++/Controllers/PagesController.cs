@@ -37,5 +37,9 @@ namespace Project__.Controllers
         {
             return View();
         }
+        public ActionResult Task()
+        {
+            return View();
+        }
     }
 }
