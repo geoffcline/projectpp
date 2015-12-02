@@ -1,0 +1,69 @@
+﻿<div class=" ui grid">
+    <div class="sixteen wide column">
+        <div class="ui vertically divided grid">
+            <div class="two column row">
+                <div class="five wide column">
+                    <div class="ui raised teal segment">
+                        <p>(DB Call) Meeting Name</p>
+                        <p>(DB Call) Date</p>
+                        <p>(DB Call) Start Time - End Time</p>
+                        <p>(DB Call) Description</p>
+                        <p>(DB Call) Created by "member"</p>
+                    </div>
+                </div>
+                <div class="eleven wide column">
+                    <div class="ui raised teal segment">
+                        <div id='calendar'></div>
+                    </div>
+                </div>
+            </div>
+            <div class="one column row">
+                <div class="sixteen wide column">
+                    <div class="ui raised teal segment">
+                        <h2>Add New Meeting</h2>
+                        <div class="ui divider"></div>
+                        <div class="ui form">
+                            <div class="field">
+                                <label>Name</label>
+                                <input type="text" />
+                            </div>
+                            <div class="field">
+                                <label>Descrpition</label>
+                                <textarea rows=2></textarea>
+                            </div>
+                            <div class="field">
+                                <label>Date</label>
+                                <div class="ui icon input">
+                                    <input type="text" id="datepicker" size="32" />
+                                    <i class="calendar icon"></i>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>Start Time</label>
+                                <div class="ui icon input">
+                                    <input type="text" id="datepicker" size="32" />
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>End Time</label>
+                                <div class="ui icon input">
+                                    <input type="text" id="datepicker" size="32" />
+                                </div>
+                            </div>
+                            <div class="ui orange submit button">Create</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        menuchange(1);
+        $('#calendar').fullCalendar({
+            height: 400
+        });
+    });
+</script>

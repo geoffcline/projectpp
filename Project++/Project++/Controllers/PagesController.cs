@@ -14,10 +14,24 @@ namespace Project__.Controllers
         public ActionResult Login()
         {
             var model = new User();
-            model = db.Users.FirstOrDefault(u => u.UserID == 1);
+            int? UserId = (int?)Session["LoginId"];
 
+            if (UserId == null)
+            {
+            model = db.Users.FirstOrDefault(u => u.UserID == 1);
+            }else
+            {
+                model = db.Users.FirstOrDefault(u => u.UserID == UserId);
+            }
 
             return View("Login", model);
+        }
+        public ActionResult Dashboard()
+        {
+            var model = new Projects();
+            model = db.Project.FirstOrDefault(p => p.ProjectID == 1);
+
+            return View("Index", model);
         }
         public ActionResult ManageGroup()
         {
@@ -28,6 +42,15 @@ namespace Project__.Controllers
             return View();
         }
         public ActionResult Task()
+        {
+            return View();
+        }
+
+        public ActionResult Settings()
+        {
+            return View();
+        }
+        public ActionResult Calendar()
         {
             return View();
         }
@@ -50,5 +73,42 @@ namespace Project__.Controllers
             db.Users.Add(user);
             db.SaveChanges();
         }
+        public JsonResult ValidateUser(string username, string password)
+        {
+            var User = new User();
+            User = db.Users.FirstOrDefault(u => u.Username == username && u.Password == password);
+
+            if(User != null)
+            {
+                Session["LoginId"] = User.UserID;
+                return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
+               
+            }else
+            {
+                return Json(new { Success = false }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public void CreateAGroup()
+        {
+            try
+            {
+                string name = (string.IsNullOrEmpty(Request.Form["groupname"]) ? null : Request.Form["groupname"]);
+                string desc = Request.Form["groupdescription"];
+
+                var group = new Projects();
+                group.Name = name;
+                group.Description = desc;
+                group.TeamLeaderID = (int)Session["LoginId"];
+
+                db.Project.Add(group);
+                db.SaveChanges();
+        }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
+        }
+        
     }
 }

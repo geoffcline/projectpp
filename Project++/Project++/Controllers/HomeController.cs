@@ -9,11 +9,15 @@ namespace Project__.Controllers
 {
     public class HomeController : Controller
     {
+        private PlusPlusContext db = new PlusPlusContext();
+
         public ActionResult Index()
         {
-            var model = new Models.Index();
-            model.i = 5;
-            return View(model);
+
+            var model = new UsersVM();
+            model.Group = db.Project.FirstOrDefault(p => p.ProjectID == 2);
+
+            return View("Index", model);
         }
     }
 

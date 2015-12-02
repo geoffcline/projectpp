@@ -1,65 +1,88 @@
-﻿<script type="text/javascript">
-    function AddTask() {
-        var params = '';
-        params += $('#addtask').serialize();
-        jQuery.ajax({
-            url: '@Url.Action("addtask")',
-            method: 'POST',
-            data: params
-        });
-    };
+﻿
+<script type="text/javascript">
+   
     $(document).ready(function () {
+        menuchange(1);
+        $('#calendar').fullCalendar({
+            height: 400
+        });
         $("#datepicker").datepicker();
+        $('select.dropdown').dropdown();
     });
 </script>
-<div class=" ui grid">
-    <div class="ui twelve column grid">
-      <!-- Task List-->
-        Task List
-    </div>
 
-    <!-- Add Task Form-->
-    <div class="ui four column grid">
-        <div class="row">
-            <!-- calendar-->
-            Calendar
+
+<div class="ui grid">
+    <div class="ten wide column">
+        <div class="ui raised teal segment">
+            <table class="ui teal celled table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Due Date</th>
+                        <th>Progress</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Task1
+
+                        <td>Desc....</td>
+                        <td class="negative">11/7/2015</td>
+                        <td class="negative">50%</td>
+                    </tr>
+                    <tr>
+                        <td>Task2</td>
+                        <td>Desc2....</td>
+                        <td class="positive">11/12/2015</td>
+                        <td class="positive">100%</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="row">
-        <div class="column">
-            <div class="ui raised teal segment">
-                <form name="addtask" id="addtask">
-                    <div class="ui grid">
-                        <div class="ten wide column">
-                            <div>
-                                <h3>Add Task</h3>
-                            </div>
-                            <div class="ui sixteen wide column">
-                                <div class="ui input">
-                                    <input name="name" placeholder="Name" type="text" size="40" style="margin-top: 5px; margin-right: 5px" value="" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="ten wide column">
-                                    <div class="ui icon input">
-                                        <input type="text" id="datepicker" size="32" placeholder="Due Date" />
-                                        <i class="calendar icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="sixteen wide column">
-                                <!-- Needs to be a Select Statement Queried for the Group-->
-                                <div class="ui input" style="margin-top: 5px">
-                                    <input name="member" placeholder="Member" type="text" size="40" value="" />
-                                </div>
-                            </div>
-                            <div class="ui orange button" style="margin-top: 5px" onclick="AddTask()">
-                                Add Task
-                            </div>
-                        </div>
+    </div>
+    <div class="six wide column">
+        <div class="ui teal raised segment">
+            <div id='calendar'></div>
+        </div>
+        <div class="ui teal raised segment">
+            <h2>Task</h2>
+            <div class="ui divider"></div>
+            <div class="ui form">
+                <div class="field">
+                    <label>Name</label>
+                    <input type="text" />
+                </div>
+                <div class="field">
+                    <label>Group Name</label>
+                    <select class="ui dropdown">
+                        <option value="groupA">GroupA</option>
+                        <option value="groupb">GroupB</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Descrpition</label>
+                    <textarea rows=2></textarea>
+                </div>
+                <div class="field">
+                    <label>Due Date</label>
+                    <div class="ui icon input">
+                        <input type="text" id="datepicker" size="32" />
+                        <i class="calendar icon"></i>
                     </div>
-                </form>
+                </div>
+                <div class="field">
+                    <label>Assign Member</label>
+                    <select class="ui dropdown">
+                        <option value="MemberA">MemberA</option>
+                        <option value="MemberB">MemberB</option>
+                    </select>
+                </div>
+                <div class="ui orange submit button">Create</div>
             </div>
         </div>
     </div>
-    </div>
 </div>
+
+
