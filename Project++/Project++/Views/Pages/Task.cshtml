@@ -1,8 +1,5 @@
 ﻿<script type="text/javascript">
-    $(document).ready(function () {
-        $("#datepicker").datepicker
-    });
-    function addtask() {
+    function AddTask() {
         var params = '';
         params += $('#addtask').serialize();
         jQuery.ajax({
@@ -11,10 +8,15 @@
             data: params
         });
     };
+    $(document).ready(function () {
+        $("#datepicker").datepicker();
+    });
 </script>
-<html>
-<body>
 <div class=" ui grid">
+    <div class="ui eight column grid">
+        <div class="ui "
+    </div>
+
     <!-- Add Task Form-->
     <div class="ui two column grid">
         <div class="column">
@@ -30,21 +32,21 @@
                                     <input name="name" placeholder="Name" type="text" size="40" style="margin-top: 5px; margin-right: 5px" value="" />
                                 </div>
                             </div>
-                            <div class="sixteen wide column">
-                                <h4>Due Date</h4>
-                                <div class="ui icon input">
-                                    <input type="text" id="datepicker" size="32" />
-                                    <i class="calendar icon"></i>
+                            <div class="row">
+                                <div class="ten wide column">
+                                    <div class="ui icon input">
+                                        <input type="text" id="datepicker" size="32" placeholder="Due Date" />
+                                        <i class="calendar icon"></i>
+                                    </div>
                                 </div>
                             </div>
                             <div class="sixteen wide column">
                                 <!-- Needs to be a Select Statement Queried for the Group-->
-                                <h4> Assign to Member</h4>
                                 <div class="ui input" style="margin-top: 5px">
-                                    <input name="member" placeholder="member" type="text" size="40" value="" />
+                                    <input name="member" placeholder="Member" type="text" size="40" value="" />
                                 </div>
                             </div>
-                            <div class="ui orange button" style="margin-top: 5px" onclick="addtask()">
+                            <div class="ui orange button" style="margin-top: 5px" onclick="AddTask()">
                                 Add Task
                             </div>
                         </div>
@@ -54,5 +56,3 @@
         </div>
     </div>
 </div>
-</body>
-</html>
