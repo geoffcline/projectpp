@@ -184,6 +184,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\fullcalendar.css" />
+    <Content Include="Content\images\avatar1.png" />
+    <Content Include="Content\images\avatar2.png" />
+    <Content Include="Content\images\avatar3.png" />
+    <Content Include="Content\images\avatar4.png" />
+    <Content Include="Content\images\avatar5.png" />
+    <Content Include="Content\images\avatar6.png" />
     <Content Include="Content\images\person-placeholder.jpg" />
     <Content Include="Content\css\semantic.css" />
     <Content Include="Content\css\semantic.min.css" />

@@ -12,6 +12,8 @@ namespace Project__.Models
         public List<Chat> Chat { get; set; }
         public Event Events { get; set; }
         public Projects Group { get; set; }
+        public List<Projects> GroupList { get; set; }
+        public List<GroupMember> GroupMemberList { get; set; }
         public GroupMember GroupMembers { get; set; }
         public Log Log { get; set; }
         public Assignment Taks { get; set; }
@@ -28,6 +30,7 @@ namespace Project__.Models
         public string LastName { get; set; }
         public string Email { get; set; }
         public int? DefaultGroupID { get; set; }
+        public string Avatar_Num { get; set; }
     }
 
     public class Chat
@@ -67,6 +70,7 @@ namespace Project__.Models
         public int GroupID { get; set; }
         public int UserID { get; set; }
         public string UserTitle { get; set; }
+        public string GroupName { get; set; }
     }
 
     public class Log

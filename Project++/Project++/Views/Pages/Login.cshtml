@@ -1,9 +1,11 @@
-﻿@model Project__.Models.User
+﻿@model Project__.Models.UsersVM
 
 <script type="text/javascript">
     function Register() {
         var params = '';
+        var checkbox_value = $('input[name="avatar"]:checked').val();
         params += $('#registerform').serialize();
+        params += '&avatarid=' + checkbox_value;
         jQuery.ajax({
             url: '@Url.Action("RegisterUser")',
             method: 'POST',
@@ -46,7 +48,7 @@
         <div class="ui raised teal segment">
             <form name="registerform" id="registerform">
                 <div class="ui grid">
-                    <div class="ten wide column">
+                    <div class="ui sixteen wide column">
                         <div>
                             <h3>Register</h3>
                         </div>
@@ -75,11 +77,52 @@
                                 <input name="password" placeholder="Password" type="text" size="40" value=""/>
                             </div>
                         </div>
+                        <div class="ui sixteen wide column">
+                            <h4 style="margin-top: 8px">Choose An Avatar</h4>
+                            <div class="ui three column centered aligned stackable grid segment">
+                                
+                                <div class="column">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="avatar" value="1">
+                                        <label><img src="~/Content/images/avatar1.png" height="50" width="50" /></label>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="avatar" value="2">
+                                        <label><img src="~/Content/images/avatar2.png" height="50" width="50" /></label>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="avatar" value="3">
+                                        <label><img src="~/Content/images/avatar3.png" height="50" width="50" /></label>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="avatar" value="4">
+                                        <label><img src="~/Content/images/avatar4.png" height="50" width="50" /></label>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="avatar" value="5">
+                                        <label><img src="~/Content/images/avatar5.png" height="50" width="50" /></label>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="avatar" value="6">
+                                        <label><img src="~/Content/images/avatar6.png" height="50" width="50" /></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="ui orange button" style="margin-top: 5px" onclick="Register()">
                             Register
                         </div>
                     </div>
-                    
                 </div>
             </form>
         </div>

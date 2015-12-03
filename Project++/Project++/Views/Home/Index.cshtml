@@ -21,7 +21,7 @@
     <div class="four wide column">
         <div class="ui card">
             <div class="image">
-                <img src="~/Content/images/person-placeholder.jpg" style="max-height: 100%; max-width: 100%;"/>
+                <img src="~/Content/images/avatar@(Model.Users.Avatar_Num).png" style="max-height: 100%; max-width: 100%;"/>
             </div>
             <div class="content">
                 <div class="meta">
@@ -33,8 +33,14 @@
             </div>
         </div>
         <div class="ui raised teal segment">
-            Groups
-            @Model.Group.Name
+            Groups<br />
+            @foreach(var grouplist in Model.GroupMemberList)
+            {
+                if(grouplist.UserID == (int)Session["LoginId"])
+                {
+                    <div>@grouplist.GroupName</div>
+                }
+            }
         </div>
     </div>
     <div class="eight wide column">

@@ -13,15 +13,15 @@ namespace Project__.Controllers
 
         public ActionResult Login()
         {
-            var model = new User();
+            var model = new UsersVM();
             int? UserId = (int?)Session["LoginId"];
 
             if (UserId == null)
             {
-            model = db.Users.FirstOrDefault(u => u.UserID == 1);
+            model.Users = db.Users.FirstOrDefault(u => u.UserID == 1);
             }else
             {
-                model = db.Users.FirstOrDefault(u => u.UserID == UserId);
+                model.Users = db.Users.FirstOrDefault(u => u.UserID == UserId);
             }
             
             return View("Login", model);
@@ -48,7 +48,15 @@ namespace Project__.Controllers
 
         public ActionResult Settings()
         {
-            return View();
+            var model = new UsersVM();
+            
+
+            int userid = (int)Session["LoginId"];
+            model.Users = db.Users.FirstOrDefault(u => u.UserID == userid);
+            model.GroupMemberList = db.GroupMembers.ToList();
+            model.GroupList = db.Projects.ToList();
+
+            return View(model);
         }
         public ActionResult Calendar()
         {
@@ -62,6 +70,7 @@ namespace Project__.Controllers
             var email = (string.IsNullOrEmpty(Request.Form["email"]) ? null : Request.Form["email"]);
             var username = (string.IsNullOrEmpty(Request.Form["username"]) ? null : Request.Form["username"]);
             var password = (string.IsNullOrEmpty(Request.Form["password"]) ? null : Request.Form["password"]);
+            var avatarid = Request.Form["avatarid"];
 
             var user = new User();
             user.FirstName = firstname;
@@ -70,6 +79,7 @@ namespace Project__.Controllers
             user.Username = username;
             user.Password = password;
             user.DefaultGroupID = null;
+            user.Avatar_Num = avatarid;
 
             db.Users.Add(user);
             db.SaveChanges();
@@ -103,8 +113,14 @@ namespace Project__.Controllers
                 group.Description = desc;
                 group.TeamLeaderID = (int)Session["LoginId"];
 
+                var groupMembers = new GroupMember();
+                groupMembers.GroupName = name;
+                groupMembers.UserID = (int)Session["LoginId"];
+
                 db.Projects.Add(group);
+                db.GroupMembers.Add(groupMembers);
                 db.SaveChanges();
+                
             }
             catch(Exception ex)
             {
@@ -124,6 +140,35 @@ namespace Project__.Controllers
             }
             return;
         }
-        
+        public void UpdateSettings()
+        {
+            var userid = (int)Session["LoginId"];
+            var firstname = (string.IsNullOrEmpty(Request.Form["firstname"]) ? null : Request.Form["firstname"]);
+            var lastname = (string.IsNullOrEmpty(Request.Form["lastname"]) ? null : Request.Form["lastname"]);
+            var email = (string.IsNullOrEmpty(Request.Form["email"]) ? null : Request.Form["email"]);
+            var username = (string.IsNullOrEmpty(Request.Form["username"]) ? null : Request.Form["username"]);
+            var oldpassword = (string.IsNullOrEmpty(Request.Form["oldpassword"]) ? null : Request.Form["oldpassword"]);
+            var newpassword = (string.IsNullOrEmpty(Request.Form["newpassword"]) ? null : Request.Form["newpassword"]);
+            var confirmpassword = (string.IsNullOrEmpty(Request.Form["confirmpassword"]) ? null : Request.Form["confirmpassword"]);
+            var defaultgroup = int.Parse(Request.Form["defaultgroup"]);
+
+
+            var user = db.Users.FirstOrDefault(u => u.UserID == userid);
+            user.FirstName = firstname;
+            user.LastName = lastname;
+            user.Email = email;
+            user.Username = username;
+            user.DefaultGroupID = defaultgroup;
+
+            if(oldpassword != null && newpassword != null && confirmpassword != null)
+            {
+                if(user.Password == oldpassword && newpassword == confirmpassword)
+                {
+                    user.Password = newpassword;
+                }
+            }
+
+            db.SaveChanges();
+        }
     }
 }

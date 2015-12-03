@@ -17,6 +17,7 @@ namespace Project__.Controllers
             var model = new UsersVM();
             int? userId = (int?)Session["LoginId"];
             model.Group = db.Projects.FirstOrDefault(p => p.ProjectID == 2);
+            model.GroupMemberList = db.GroupMembers.ToList();
             model.Users = db.Users.FirstOrDefault(u => u.UserID == userId);
             model.Chat = db.Chats.ToList();
 
