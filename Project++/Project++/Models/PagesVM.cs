@@ -16,7 +16,10 @@ namespace Project__.Models
         public List<GroupMember> GroupMemberList { get; set; }
         public GroupMember GroupMembers { get; set; }
         public Log Log { get; set; }
-        public Assignment Taks { get; set; }
+        public Tasks Tasks { get; set; }
+        public List<Tasks> TaskList { get; set; }
+        public int? UserId { get; set; }
+        public int? GroupId { get; set; }
         
     }
 
@@ -83,14 +86,15 @@ namespace Project__.Models
         public int GroupID { get; set; }
     }
 
-    public class Assignment
+    public class Tasks
     {
         [Key]
-        public int GroupID { get; set; }
         public string TaskName { get; set; }
+        public int? GroupID { get; set; }
         public int AssignedUserID { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime DueDate { get; set; }
+        public string Description { get; set; }
     }
 
     public class PlusPlusContext : DbContext
@@ -104,7 +108,7 @@ namespace Project__.Models
         public DbSet<Projects> Projects { get; set; }
         public DbSet<GroupMember> GroupMembers { get; set; }
         public DbSet<Log> Log { get; set; }
-        public DbSet<Assignment> Tasks { get; set; }
+        public DbSet<Tasks> Tasks { get; set; }
        
         
     }

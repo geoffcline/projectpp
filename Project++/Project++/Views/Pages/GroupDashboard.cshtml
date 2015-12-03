@@ -1,0 +1,56 @@
+﻿@model Project__.Models.UsersVM
+
+
+
+<div class="ui grid">
+    <div class="four wide column">
+        <div class="ui card">
+            <div class="image">
+                <img src="~/Content/images/avatar@(Model.Users.Avatar_Num).png" style="max-height: 100%; max-width: 100%;" />
+            </div>
+            <div class="content">
+                <div class="meta">
+                    @(Model.Users.FirstName != null ? Model.Users.FirstName : "Blank") @(Model.Users.LastName != null ? Model.Users.LastName : "Blank")
+                </div>
+                <div class="description">
+                    @Model.Users.Username
+                </div>
+            </div>
+        </div>
+        <div class="ui raised teal segment">
+            Groups<br />
+            @foreach (var grouplist in Model.GroupMemberList)
+            {
+                if (grouplist.UserID == (int)Session["LoginId"])
+                {
+                    <div>@grouplist.GroupName</div>
+                }
+            }
+        </div>
+    </div>
+    <div class="eight wide column">
+        <div class="ui teal raised segment">
+            Tasks
+        </div>
+        <div class="ui teal raised segment">
+            <form name="messageform" id="messageform">
+                <div id="chatbox"></div>
+                <div class="ui input">
+                    New Message <br />
+                    <input name="newmessage" id="newmessage" rows="2">
+                </div>
+            </form>
+            <div class="ui orange button" style="margin-top: 5px" onclick="Message()">Send</div>
+        </div>
+    </div>
+    <div class="four wide column">
+        <div class="ui teal raised segment">
+            <div id='calendar'></div>
+        </div>
+        <div class="ui teal raised segment">
+            Meetings
+            <div class="ui divider"></div>
+            <p>New Meeting Here</p>
+        </div>
+    </div>
+</div>

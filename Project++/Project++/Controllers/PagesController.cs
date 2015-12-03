@@ -26,12 +26,12 @@ namespace Project__.Controllers
             
             return View("Login", model);
         }
-        public ActionResult Dashboard()
+        public ActionResult GroupDashboard()
         {
             var model = new Projects();
             model = db.Projects.FirstOrDefault(p => p.ProjectID == 1);
 
-            return View("Index", model);
+            return View("GroupDashboard", model);
         }
         public ActionResult ManageGroup()
         {
@@ -43,7 +43,15 @@ namespace Project__.Controllers
         }
         public ActionResult Task()
         {
-            return View();
+            var model = new UsersVM();
+            int userid = (int)Session["LoginId"];
+            model.UserId = userid;
+            model.Users = db.Users.FirstOrDefault(u => u.UserID == userid);
+            model.GroupMemberList = db.GroupMembers.ToList();
+            model.GroupList = db.Projects.ToList();
+            model.TaskList = db.Tasks.ToList();
+
+            return View(model);
         }
 
         public ActionResult Settings()
@@ -169,6 +177,30 @@ namespace Project__.Controllers
             }
 
             db.SaveChanges();
+        }
+        public void CreateNewTask()
+        {
+            
+                int userid = (int)Session["LoginId"];
+                var taskname = (string.IsNullOrEmpty(Request.Form["taskname"]) ? null : Request.Form["taskname"]);
+                int groupid = int.Parse(Request.Form["groupid"]);
+                var description = (string.IsNullOrEmpty(Request.Form["description"]) ? null : Request.Form["description"]);
+                var duedate = DateTime.Parse(Request.Form["duedate"]);
+
+
+
+                var tasks = new Tasks();
+                tasks.GroupID = groupid;
+                tasks.TaskName = taskname;
+                tasks.AssignedUserID = userid;
+                tasks.CreatedDate = DateTime.Now;
+                tasks.DueDate = duedate;
+                tasks.Description = description;
+
+                db.Tasks.Add(tasks);
+                db.SaveChanges();
+            
+
         }
     }
 }

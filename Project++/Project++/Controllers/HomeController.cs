@@ -23,13 +23,6 @@ namespace Project__.Controllers
 
             return View("Index", model);
         }
-        public ActionResult MessageBox()
-        {
-            var model = new UsersVM();
-            //model.Chat = db.Chat.ToList();
-
-            return PartialView("MessageBox", model);
-        }
         public void NewMessage()
         {
             try
