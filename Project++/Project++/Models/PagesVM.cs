@@ -20,6 +20,7 @@ namespace Project__.Models
         public List<Tasks> TaskList { get; set; }
         public int? UserId { get; set; }
         public int? GroupId { get; set; }
+        public bool HasGroup { get; set; }
         
     }
 

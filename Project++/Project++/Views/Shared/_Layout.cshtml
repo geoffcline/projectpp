@@ -1,6 +1,14 @@
 ﻿
 <script type="text/javascript">
-    
+    function GroupDash(gid) {
+        var params = gid;
+        $.ajax({
+            url: '@Url.Action("GroupDash")',
+            method: 'POST',
+            data: "groupid=" + 15,
+            success: window.location.href = "@Url.Action("GroupDashboard", "Pages")"
+        });
+    };
     function menuchange(i) {
         $('#tab' + i).addClass('active');
     };
@@ -11,9 +19,6 @@
         });
     };
 </script>
-
-
-
 
 <!DOCTYPE html>
 <html>
@@ -40,6 +45,7 @@
             <div class="ui top attached inverted teal menu">
                 
                 @{
+                    
                     if (Session["LoginId"] == null)
                     {
                         <a id="tab5" class="ui right item" href="/Pages/Login">Sign In</a>
@@ -47,7 +53,7 @@
                     else
                     {
                         <a id="tab1" class="item" href="/">Dashboard</a>
-                        <a id="tab2" class="item" href="/Pages/GroupDashboard">Group Dashboard</a>
+                        <a id="tab2" class="item" onclick="GroupDash(null)">Group Dashboard</a>
                         <div class="ui dropdown item">
                             Groups
                             <i class="dropdown icon"></i>
@@ -59,7 +65,7 @@
                         <a id="tab3" class="item" href="/Pages/Task">Task</a>
                         <a id="tab4" class="item" href="/Pages/Calendar">Calendar</a>
                         <a id="tab6" class="ui right item" href="/Pages/Settings">Settings</a>
-                        <div name="sign_out" id="sign_out" class="ui item" onclick="SignOut()">
+                        <div name="sign_out" id="sign_out" class="ui item" style="cursor: pointer" onclick="SignOut()">
                             <i class="sign out icon"></i>
                         </div>
                     }

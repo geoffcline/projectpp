@@ -1,31 +1,37 @@
 ﻿@model Project__.Models.UsersVM
 
+<script type="text/javascript">
+    function Message() {
+        var params = '';
+        params += $('#messageform').serialize();
+        $.ajax({
+            url: '@Url.Action("NewMessage")',
+            method: 'POST',
+            data: params
 
+        });
+    };
+    function MessageBox() {
+        $("#chatbox").load('MessageBox');
+    };
+</script>
 
 <div class="ui grid">
     <div class="four wide column">
         <div class="ui card">
             <div class="image">
-                <img src="~/Content/images/avatar@(Model.Users.Avatar_Num).png" style="max-height: 100%; max-width: 100%;" />
+                <img src="~/Content/images/avatar1.png" style="max-height: 100%; max-width: 100%;" />
             </div>
             <div class="content">
                 <div class="meta">
-                    @(Model.Users.FirstName != null ? Model.Users.FirstName : "Blank") @(Model.Users.LastName != null ? Model.Users.LastName : "Blank")
+                    @Model.Group.Name
                 </div>
-                <div class="description">
-                    @Model.Users.Username
+                <div class="description">Testing
                 </div>
             </div>
         </div>
         <div class="ui raised teal segment">
             Groups<br />
-            @foreach (var grouplist in Model.GroupMemberList)
-            {
-                if (grouplist.UserID == (int)Session["LoginId"])
-                {
-                    <div>@grouplist.GroupName</div>
-                }
-            }
         </div>
     </div>
     <div class="eight wide column">
@@ -54,3 +60,12 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        menuchange(1);
+        $('#calendar').fullCalendar({
+            height: 400
+        });
+    });
+</script>

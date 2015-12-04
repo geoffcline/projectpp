@@ -1,4 +1,5 @@
-﻿
+﻿@model Project__.Models.UsersVM
+
 
 <script type="text/javascript">
     function CreateGroup() {
@@ -11,17 +12,18 @@
             success: function () {
                 window.location.href = "@Url.Action("CreateGroup", "Pages")";
             },
-            error: function() {
+            error: function () {
                 window.alert("Try Again");
             }
         });
-    }
-
+    };
     $(document).ready(function () {
         $("#datepicker").datepicker();
-
+        Alert();
     });
 </script>
+
+
 
 <div class=" ui grid">
     <div class="three wide column">

@@ -28,18 +28,30 @@ namespace Project__.Controllers
         }
         public ActionResult GroupDashboard()
         {
-            var model = new Projects();
-            model = db.Projects.FirstOrDefault(p => p.ProjectID == 1);
+            var model = new UsersVM();
+            model.GroupId = (int?)Session["GroupId"];
+            model.UserId = (int?)Session["LoginId"];
+            model.Users = db.Users.FirstOrDefault(u => u.UserID == model.UserId);
+            model.Group = db.Projects.FirstOrDefault(g => g.ProjectID == model.GroupId);
 
-            return View("GroupDashboard", model);
+            if(model.GroupId == null)
+            {
+                return RedirectToAction("CreateGroup", new { nogroup = true });
+            }
+            else
+            {
+                return View(model);
+            }
         }
         public ActionResult ManageGroup()
         {
             return View();
         }
-        public ActionResult CreateGroup()
+        public ActionResult CreateGroup(bool nogroup)
         {
-            return View();
+            var model = new UsersVM();
+            model.HasGroup = nogroup;
+            return View(model);
         }
         public ActionResult Task()
         {
@@ -102,6 +114,11 @@ namespace Project__.Controllers
             if(User != null)
             {
                 Session["LoginId"] = User.UserID;
+                if(User.DefaultGroupID != null)
+                {
+                    var model = new UsersVM();
+                    model.GroupId = User.DefaultGroupID;
+                }
                 return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
                
             }else
@@ -201,6 +218,55 @@ namespace Project__.Controllers
                 db.SaveChanges();
             
 
+        }
+        public void NewMessage()
+        {
+            try
+            {
+                string newmessage = Request.Form["newmessage"];
+
+                var chat = new Chat();
+
+                chat.GroupID = 34;
+                chat.TimeStamp = DateTime.Now;
+                chat.UserId = (int)Session["LoginId"];
+                chat.Message = newmessage;
+
+                db.Chats.Add(chat);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void GroupDash()
+        {
+            int? groupid = int.Parse(Request.Form["groupid"]);
+
+            var model = new UsersVM();
+            model.GroupId = groupid;
+            model.UserId = (int?)Session["LoginId"];
+            model.Users = db.Users.FirstOrDefault(u => u.UserID == model.UserId);
+
+            if (groupid == null)
+            {
+                if (model.Users.DefaultGroupID != null)
+                {
+                    model.Group = db.Projects.FirstOrDefault(p => p.ProjectID == model.Users.DefaultGroupID);
+                    Session["GroupId"] = model.Group.ProjectID;
+                }else
+                {
+                    Session["GroupId"] = null;
+                }
+            }
+            else
+            {
+                model.Group = db.Projects.FirstOrDefault(p => p.ProjectID == groupid);
+                Session["GroupId"] = model.Group.ProjectID;
+            }
+            
+            
         }
     }
 }
