@@ -45,11 +45,9 @@ namespace Project__.Controllers
                 var service = new DriveService(new BaseClientService.Initializer
                 {
                     HttpClientInitializer = result.Credential,
-                    ApplicationName = "ASP.NET MVC Sample"
+                    ApplicationName = "Project++"
                 });
 
-                // YOUR CODE SHOULD BE HERE..
-                // SAMPLE CODE:
                 var list = service.Files.List();
                 list.Q = "title = 'Software Engineering Project' and mimeType = 'application/vnd.google-apps.folder'";
                 var files = list.Execute();
@@ -59,7 +57,7 @@ namespace Project__.Controllers
                     list.Q = "'" + thing.Id + "' in parents";
                     newFiles = list.Execute();   
                 }
-                
+
                 ViewBag.Message = "FILE COUNT IS: " + files.Items.Count();
                 return View(newFiles);
             }
@@ -71,7 +69,7 @@ namespace Project__.Controllers
     }
     public class AuthCallbackController : Google.Apis.Auth.OAuth2.Mvc.Controllers.AuthCallbackController
     {
-        protected override Google.Apis.Auth.OAuth2.Mvc.FlowMetadata FlowData
+        protected override FlowMetadata FlowData
         {
             get { return new AppFlowMetadata(); }
         }
