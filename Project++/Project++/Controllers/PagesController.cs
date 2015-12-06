@@ -10,6 +10,7 @@ using Project__.Models;
 using Google.Apis.Auth.OAuth2.Web;
 using Drive.api.auth;
 using Google.Apis.Drive.v2.Data;
+using System;
 
 namespace Project__.Controllers
 {
@@ -24,8 +25,9 @@ namespace Project__.Controllers
 
             if (UserId == null)
             {
-            model.Users = db.Users.FirstOrDefault(u => u.UserID == 1);
-            }else
+                model.Users = db.Users.FirstOrDefault(u => u.UserID == 1);
+            }
+            else
             {
                 model.Users = db.Users.FirstOrDefault(u => u.UserID == UserId);
             }
@@ -40,7 +42,7 @@ namespace Project__.Controllers
             model.Users = db.Users.FirstOrDefault(u => u.UserID == model.UserId);
             model.Group = db.Projects.FirstOrDefault(g => g.ProjectID == model.GroupId);
 
-            if(model.GroupId == null)
+            if (model.GroupId == null)
             {
                 return RedirectToAction("CreateGroup", new { nogroup = true });
             }
@@ -75,7 +77,7 @@ namespace Project__.Controllers
         public ActionResult Settings()
         {
             var model = new UsersVM();
-            
+
 
             int userid = (int)Session["LoginId"];
             model.Users = db.Users.FirstOrDefault(u => u.UserID == userid);
@@ -104,10 +106,10 @@ namespace Project__.Controllers
                 list.Q = "title = 'Software Engineering Project' and mimeType = 'application/vnd.google-apps.folder'";
                 var files = list.Execute();
                 FileList newFiles = new FileList();
-                foreach(File thing in files.Items)
+                foreach (File thing in files.Items)
                 {
                     list.Q = "'" + thing.Id + "' in parents";
-                    newFiles = list.Execute();   
+                    newFiles = list.Execute();
                 }
 
                 ViewBag.Message = "FILE COUNT IS: " + files.Items.Count();
@@ -117,13 +119,6 @@ namespace Project__.Controllers
             {
                 return new RedirectResult(result.RedirectUri);
             }
-        }
-    }
-    public class AuthCallbackController : Google.Apis.Auth.OAuth2.Mvc.Controllers.AuthCallbackController
-    {
-        protected override FlowMetadata FlowData
-        {
-            get { return new AppFlowMetadata(); }
         }
 
         public void RegisterUser()
@@ -135,7 +130,7 @@ namespace Project__.Controllers
             var password = (string.IsNullOrEmpty(Request.Form["password"]) ? null : Request.Form["password"]);
             var avatarid = Request.Form["avatarid"];
 
-            var user = new User();
+            var user = new Models.User();
             user.FirstName = firstname;
             user.LastName = lastname;
             user.Email = email;
@@ -151,20 +146,21 @@ namespace Project__.Controllers
         }
         public JsonResult ValidateUser(string username, string password)
         {
-            var User = new User();
+            var User = new Models.User();
             User = db.Users.FirstOrDefault(u => u.Username == username && u.Password == password);
 
-            if(User != null)
+            if (User != null)
             {
                 Session["LoginId"] = User.UserID;
-                if(User.DefaultGroupID != null)
+                if (User.DefaultGroupID != null)
                 {
                     var model = new UsersVM();
                     model.GroupId = User.DefaultGroupID;
                 }
                 return Json(new { Success = true }, JsonRequestBehavior.AllowGet);
-               
-            }else
+
+            }
+            else
             {
                 return Json(new { Success = false }, JsonRequestBehavior.AllowGet);
             }
@@ -188,13 +184,13 @@ namespace Project__.Controllers
                 db.Projects.Add(group);
                 db.GroupMembers.Add(groupMembers);
                 db.SaveChanges();
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
-            
+
         }
         public void SignOut()
         {
@@ -202,7 +198,7 @@ namespace Project__.Controllers
             {
                 Session["LoginId"] = null;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -228,9 +224,9 @@ namespace Project__.Controllers
             user.Username = username;
             user.DefaultGroupID = defaultgroup;
 
-            if(oldpassword != null && newpassword != null && confirmpassword != null)
+            if (oldpassword != null && newpassword != null && confirmpassword != null)
             {
-                if(user.Password == oldpassword && newpassword == confirmpassword)
+                if (user.Password == oldpassword && newpassword == confirmpassword)
                 {
                     user.Password = newpassword;
                 }
@@ -240,26 +236,26 @@ namespace Project__.Controllers
         }
         public void CreateNewTask()
         {
-            
-                int userid = (int)Session["LoginId"];
-                var taskname = (string.IsNullOrEmpty(Request.Form["taskname"]) ? null : Request.Form["taskname"]);
-                int groupid = int.Parse(Request.Form["groupid"]);
-                var description = (string.IsNullOrEmpty(Request.Form["description"]) ? null : Request.Form["description"]);
-                var duedate = DateTime.Parse(Request.Form["duedate"]);
+
+            int userid = (int)Session["LoginId"];
+            var taskname = (string.IsNullOrEmpty(Request.Form["taskname"]) ? null : Request.Form["taskname"]);
+            int groupid = int.Parse(Request.Form["groupid"]);
+            var description = (string.IsNullOrEmpty(Request.Form["description"]) ? null : Request.Form["description"]);
+            var duedate = DateTime.Parse(Request.Form["duedate"]);
 
 
 
-                var tasks = new Tasks();
-                tasks.GroupID = groupid;
-                tasks.TaskName = taskname;
-                tasks.AssignedUserID = userid;
-                tasks.CreatedDate = DateTime.Now;
-                tasks.DueDate = duedate;
-                tasks.Description = description;
+            var tasks = new Tasks();
+            tasks.GroupID = groupid;
+            tasks.TaskName = taskname;
+            tasks.AssignedUserID = userid;
+            tasks.CreatedDate = DateTime.Now;
+            tasks.DueDate = duedate;
+            tasks.Description = description;
 
-                db.Tasks.Add(tasks);
-                db.SaveChanges();
-            
+            db.Tasks.Add(tasks);
+            db.SaveChanges();
+
 
         }
         public void NewMessage()
@@ -298,7 +294,8 @@ namespace Project__.Controllers
                 {
                     model.Group = db.Projects.FirstOrDefault(p => p.ProjectID == model.Users.DefaultGroupID);
                     Session["GroupId"] = model.Group.ProjectID;
-                }else
+                }
+                else
                 {
                     Session["GroupId"] = null;
                 }
@@ -308,8 +305,15 @@ namespace Project__.Controllers
                 model.Group = db.Projects.FirstOrDefault(p => p.ProjectID == groupid);
                 Session["GroupId"] = model.Group.ProjectID;
             }
-            
-            
+
+
         }
+    }
+}
+public class AuthCallbackController : Google.Apis.Auth.OAuth2.Mvc.Controllers.AuthCallbackController
+{
+    protected override FlowMetadata FlowData
+    {
+        get { return new AppFlowMetadata(); }
     }
 }
