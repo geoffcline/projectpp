@@ -111,8 +111,7 @@ namespace Project__.Controllers
                     list.Q = "'" + thing.Id + "' in parents";
                     newFiles = list.Execute();
                 }
-
-                ViewBag.Message = "FILE COUNT IS: " + files.Items.Count();
+                
                 return View(newFiles);
             }
             else
