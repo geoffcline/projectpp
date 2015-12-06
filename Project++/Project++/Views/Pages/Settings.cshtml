@@ -1,0 +1,142 @@
+﻿@model Project__.Models.UsersVM
+
+
+<script type="text/javascript">
+    function UpdateSettings() {
+        var params = '';
+        params += $('#settingsform').serialize();
+        $.ajax({
+            url: '@Url.Action("UpdateSettings")',
+            method: 'POST',
+            data: params,
+            success: location.reload()
+        });
+    };
+</script>
+
+<div class=" ui grid">
+    <div class="three wide column">
+        &nbsp;
+    </div>
+    <div class="ten wide column">
+        <div class="ui raised teal segment">
+            <form name="settingsform" id="settingsform">
+                <h3 style="text-align: center">Settings</h3>
+                <div class="ui two column grid">
+                    <div class="row">
+                        <div class="six wide column" style="text-align: right">
+                            <h4>First Name</h4>
+                        </div>
+                        <div class="ten wide column">
+                            <div class="ui input">
+                                <input name="firstname" type="text" size="35" value="@Model.Users.FirstName" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="six wide column" style="text-align: right">
+                            <h4>Last Name</h4>
+                        </div>
+                        <div class="ten wide column">
+                            <div class="ui input">
+                                <input name="lastname" type="text" size="35" value="@Model.Users.LastName" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="six wide column" style="text-align: right">
+                            <h4>Username</h4>
+                        </div>
+                        <div class="ten wide column">
+                            <div class="ui input">
+                                <input name="username" type="text" size="35" value="@Model.Users.Username" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="six wide column" style="text-align: right">
+                            <h4>Email</h4>
+                        </div>
+                        <div class="ten wide column">
+                            <div class="ui input">
+                                <input name="email" type="text" size="35" value="@Model.Users.Email" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="six wide column" style="text-align: right">
+                            <h4>Old Password</h4>
+                        </div>
+                        <div class="ten wide column">
+                            <div class="ui input">
+                                <input name="oldpassword" type="password" size="35" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="six wide column" style="text-align: right">
+                            <h4>New Password</h4>
+                        </div>
+                        <div class="ten wide column">
+                            <div class="ui input">
+                                <input name="newpassword" type="password" size="35" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="six wide column" style="text-align: right">
+                            <h4>Confirm New Password</h4>
+                        </div>
+                        <div class="ten wide column">
+                            <div class="ui input">
+                                <input name="confirmpassword" type="password" size="35" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="six wide column" style="text-align: right">
+                            <h4>Default Group</h4>
+                        </div>
+                        <div class="six wide column">
+                            <select name="defaultgroup" class="ui fluid search dropdown">
+                                <option value="">No Default</option>
+                                @foreach (var g in Model.GroupMemberList)
+                                {
+                                    foreach (var p in Model.GroupList)
+                                    {
+                                        if (g.GroupName == p.Name)
+                                        {
+                                            <option value="@p.ProjectID" @(Model.Users.DefaultGroupID == p.ProjectID ? "selected" : "")>@g.GroupName</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="four wide column">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="six wide column">
+                            &nbsp;
+                        </div>
+                        <div class="ten wide column" style="text-align: left">
+                            <div class="ui orange button" onclick="UpdateSettings()">
+                                Update
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="three wide column">
+        &nbsp;
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        menuchange(6);
+    });
+</script>

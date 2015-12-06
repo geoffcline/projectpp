@@ -1,0 +1,132 @@
+﻿@model Project__.Models.UsersVM
+<script type="text/javascript">
+    function NewTask() {
+        var params = '';
+        params += $("#newtaskform").serialize();
+        $.ajax({
+            url: '@Url.Action("CreateNewTask")',
+            method: 'POST',
+            data: params
+        });
+        location.reload();
+    };
+   
+    $(document).ready(function () {
+        menuchange(1);
+        $('#calendar').fullCalendar({
+            height: 400
+        });
+        $("#datepicker").datepicker();
+        $('select.dropdown').dropdown();
+    });
+</script>
+
+
+<div class="ui grid">
+    <div class="ten wide column">
+        <div class="ui raised teal segment">
+            <table class="ui teal celled table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Due Date</th>
+                        <th>Group</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var t in Model.TaskList)
+                    {
+                        foreach (var p in Model.GroupList)
+                        {
+                            if (t.AssignedUserID == Model.UserId && p.ProjectID == t.GroupID)
+                            {
+                                <tr>
+                                    <td>
+                                        @t.TaskName
+                                    </td>
+                                    <td>
+                                        @t.Description
+                                    </td>
+                                    <td class="@(t.DueDate > DateTime.Now ? "positive" : "negative")">
+                                        @t.DueDate.ToString("MM/dd/yyyy")
+                                    </td>
+                                    <td>
+                                        @p.Name
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    }
+                    <tr>
+                        <td>Task1
+
+                        <td>Desc....</td>
+                        <td class="negative">11/7/2015</td>
+                        <td class="negative">50%</td>
+                    </tr>
+                    <tr>
+                        <td>Task2</td>
+                        <td>Desc2....</td>
+                        <td class="positive">11/12/2015</td>
+                        <td class="positive">100%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="six wide column">
+        <div class="ui teal raised segment">
+            <div id='calendar'></div>
+        </div>
+        <div class="ui teal raised segment">
+            <form name="newtaskform" id="newtaskform">
+                <h2>Task</h2>
+                <div class="ui divider"></div>
+                <div class="ui form">
+                    <div class="field">
+                        <label>Name</label>
+                        <input type="text" name="taskname" />
+                    </div>
+                    <div class="field">
+                        <label>Group Name</label>
+                        <select class="ui dropdown" name="groupid">
+                            <option value="" style="@Model."></option>
+                            @foreach (var g in Model.GroupMemberList)
+                            {
+                                foreach (var p in Model.GroupList)
+                                {
+                                    if (g.GroupName == p.Name && g.UserID == (int)Session["LoginId"])
+                                    {
+                                        <option value="@p.ProjectID" @(Model.Users.DefaultGroupID == p.ProjectID ? "selected" : "")>@g.GroupName</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Description</label>
+                        <input type="text" name="description" />
+                    </div>
+                    <div class="field">
+                        <label>Due Date</label>
+                        <div class="ui icon input">
+                            <input type="text" name="duedate" id="datepicker" size="32" />
+                            <i class="calendar icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Assign Member</label>
+                        <select class="ui dropdown" name="memberid">
+                            <option value="">--</option>
+                        </select>
+                    </div>
+                    <div class="ui orange submit button" onclick="NewTask()">Create</div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

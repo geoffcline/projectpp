@@ -1,5 +1,4 @@
-﻿
-@model Project__.Models.UsersVM
+﻿@model Project__.Models.UsersVM
 
 <script type="text/javascript">
     function Message() {
@@ -21,26 +20,18 @@
     <div class="four wide column">
         <div class="ui card">
             <div class="image">
-                <img src="~/Content/images/avatar@(Model.Users.Avatar_Num).png" style="max-height: 100%; max-width: 100%;"/>
+                <img src="~/Content/images/avatar1.png" style="max-height: 100%; max-width: 100%;" />
             </div>
             <div class="content">
                 <div class="meta">
-                    @(Model.Users.FirstName != null ? Model.Users.FirstName : "Blank") @(Model.Users.LastName != null ? Model.Users.LastName : "Blank")
+                    @Model.Group.Name
                 </div>
-                <div class="description">
-                    @Model.Users.Username
+                <div class="description">Testing
                 </div>
             </div>
         </div>
         <div class="ui raised teal segment">
             Groups<br />
-            @foreach(var grouplist in Model.GroupMemberList)
-            {
-                if(grouplist.UserID == (int)Session["LoginId"])
-                {
-                    <a href="/Pages/GroupDashboard">@grouplist.GroupName</a>
-                }
-            }
         </div>
     </div>
     <div class="eight wide column">

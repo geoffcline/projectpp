@@ -1,11 +1,29 @@
-﻿
+﻿@model Project__.Models.UsersVM
+
 
 <script type="text/javascript">
+    function CreateGroup() {
+        var params = '';
+        params += $('#creategroupform').serialize();
+        jQuery.ajax({
+            url: '@Url.Action("CreateAGroup")',
+            method: 'POST',
+            data: params,
+            success: function () {
+                window.location.href = "@Url.Action("CreateGroup", "Pages")";
+            },
+            error: function () {
+                window.alert("Try Again");
+            }
+        });
+    };
     $(document).ready(function () {
         $("#datepicker").datepicker();
-        
+        Alert();
     });
 </script>
+
+
 
 <div class=" ui grid">
     <div class="three wide column">
@@ -13,61 +31,63 @@
     </div>
     <div class="ten wide column">
         <div class="ui raised teal segment">
-            <h3 style="text-align: center">Create A Group</h3>
-            <div class="ui two column grid">
-                <div class="row">
-                    <div class="six wide column" style="text-align: right">
-                        <h4>Project Name</h4>
+            <form name="creategroupform" id="creategroupform">
+                <h3 style="text-align: center">Create A Group</h3>
+                <div class="ui two column grid">
+                    <div class="row">
+                        <div class="six wide column" style="text-align: right">
+                            <h4>Group Name</h4>
+                        </div>
+                        <div class="ten wide column">
+                            <div class="ui input">
+                                <input name="groupname" type="text" size="35" />
+                            </div>
+                        </div>
                     </div>
-                    <div class="ten wide column">
-                        <div class="ui input">
-                            <input type="text" size="35" />
+                    <div class="row">
+                        <div class="six wide column" style="text-align: right">
+                            <h4>Group Description</h4>
+                        </div>
+                        <div class="ten wide column">
+                            <div class="ui input">
+                                <input name="groupdescription" type="text" size="35" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="six wide column" style="text-align: right">
+                            <h4>Due Date</h4>
+                        </div>
+                        <div class="ten wide column">
+                            <div class="ui icon input">
+                                <input type="text" id="datepicker" size="32" />
+                                <i class="calendar icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="six wide column" style="text-align: right">
+                            <h4>Members</h4>
+                        </div>
+                        <div class="ten wide column">
+                            <div class="ui input">
+                                <input type="text" size="28" />
+                            </div>
+                            <div class="ui button" style="color: orange">+</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="six wide column">
+                            &nbsp;
+                        </div>
+                        <div class="ten wide column" style="text-align: left">
+                            <div class="ui orange button" onclick="CreateGroup()">
+                                Create Group
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="six wide column" style="text-align: right">
-                        <h4>Project Description</h4>
-                    </div>
-                    <div class="ten wide column">
-                        <div class="ui input">
-                            <input type="text" size="35" />
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="six wide column" style="text-align: right">
-                        <h4>Due Date</h4>
-                    </div>
-                    <div class="ten wide column">
-                        <div class="ui icon input">
-                            <input type="text" id="datepicker" size="32" />
-                            <i class="calendar icon"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="six wide column"style="text-align: right">
-                        <h4>Members</h4>
-                    </div>
-                    <div class="ten wide column">
-                        <div class="ui input">
-                            <input type="text" size="28" />
-                        </div>
-                        <div class="ui button" style="color: orange">+</div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="six wide column">
-                        &nbsp;
-                    </div>
-                    <div class="ten wide column" style="text-align: left">
-                        <div class="ui orange button">
-                            Create Group
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
     <div class="three wide column">
