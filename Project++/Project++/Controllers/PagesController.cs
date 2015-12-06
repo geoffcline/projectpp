@@ -32,10 +32,6 @@ namespace Project__.Controllers
         {
             return View();
         }
-        //public ActionResult DriveFiles()
-        //{
-        //    return View();
-        //}
         public ActionResult DriveFiles(CancellationToken cancellationToken)
         {
             var result = new AuthorizationCodeMvcApp(this, new AppFlowMetadata()).AuthorizeAsync(cancellationToken).Result;
