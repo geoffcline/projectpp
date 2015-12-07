@@ -11,7 +11,17 @@
             data: params
 
         });
-    }; 
+    };
+    function NewTask() {
+        var params = '';
+        params += $("#newtaskform").serialize();
+        $.ajax({
+            url: '@Url.Action("CreateNewTask")',
+            method: 'POST',
+            data: params
+        });
+        location.reload();
+    };
     function MessageBox() { s
         $("#chatbox").load('MessageBox');
     };
@@ -38,24 +48,96 @@
             {
                 if(grouplist.UserID == (int)Session["LoginId"])
                 {
-                    <a href="/Pages/GroupDashboard">@grouplist.GroupName</a><br />
+                    <a href="/Pages/GroupDashboard">@grouplist.GroupName</a><div class="ui radio checkbox"><input type="radio" name="check" checked="checked" /><label></label></div><br />
                 }
             }
         </div>
     </div>
-    <div class="eight wide column">
+    <div class="twelve wide column">
         <div class="ui teal raised segment">
-            Tasks
-        </div>
-    </div>
-    <div class="four wide column">
-        <div class="ui teal raised segment">
-            <div id='calendar'></div>
-        </div>
-        <div class="ui teal raised segment">
-            Meetings
-            <div class="ui divider"></div>
-            <p>New Meeting Here</p>
+            <h4>Task</h4>
+            <div class="ui grid">
+                <div class="eleven wide column">
+                        <table class="ui teal celled table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Due Date</th>
+                                    <th>Group</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var t in Model.TaskList)
+                                {
+                                    foreach (var p in Model.GroupList)
+                                    {
+                                        if (t.AssignedUserID == Model.UserId && p.ProjectID == t.GroupID)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @t.TaskName
+                                                </td>
+                                                <td>
+                                                    @t.Description
+                                                </td>
+                                                <td class="@(t.DueDate > DateTime.Now ? "positive" : "negative")">
+                                                    @t.DueDate.ToString("MM/dd/yyyy")
+                                                </td>
+                                                <td>
+                                                    @p.Name
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+                </div>
+                <div class="five wide column">
+                    <div class="ui teal raised segment">
+                        <form name="newtaskform" id="newtaskform">
+                            <h4>Create A Task</h4>
+                            <div class="ui divider"></div>
+                            <div class="ui form">
+                                <div class="field">
+                                    <label>Name</label>
+                                    <input type="text" name="taskname" />
+                                </div>
+                                <div class="field">
+                                    <label>Group Name</label>
+                                    <select class="ui dropdown" name="groupid" style="max-width: 90%">
+                                        <option value="" style=""></option>
+                                        @foreach (var g in Model.GroupMemberList)
+                                        {
+                                            foreach (var p in Model.GroupList)
+                                            {
+                                                if (g.GroupName == p.Name && g.UserID == (int)Session["LoginId"])
+                                                {
+                                                    <option value="@p.ProjectID" @(Model.Users.DefaultGroupID == p.ProjectID ? "selected" : "")>@g.GroupName</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label>Description</label>
+                                    <input type="text" name="description" />
+                                </div>
+                                <div class="field">
+                                    <label>Due Date</label>
+                                    <div class="ui icon input">
+                                        <input type="text" name="duedate" id="datepicker" size="32" />
+                                        <i class="calendar icon"></i>
+                                    </div>
+                                </div>
+                                <div class="ui orange submit button" onclick="NewTask()">Create</div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -66,5 +148,7 @@
         $('#calendar').fullCalendar({
             height: 400
         });
+        $("#datepicker").datepicker();
+        $('select.dropdown').dropdown();
     });
 </script>

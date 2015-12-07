@@ -40,10 +40,9 @@ namespace Project__.Controllers
             model.GroupId = (int?)Session["GroupId"];
             model.UserId = (int?)Session["LoginId"];
             model.Users = db.Users.FirstOrDefault(u => u.UserID == model.UserId);
-            model.Group = db.Projects.FirstOrDefault(g => g.ProjectID == model.GroupId);
-
-                return View(model);
+            model.Group = db.Projects.FirstOrDefault(g => g.ProjectID == 22);
             
+                return View(model);
         }
         public ActionResult ManageGroup()
         {
@@ -81,7 +80,10 @@ namespace Project__.Controllers
         }
         public ActionResult Calendar()
         {
-            return View();
+            var model = new UsersVM();
+            model.EventList = db.Events.ToList();
+
+            return View(model);
         }
         public ActionResult DriveFiles(CancellationToken cancellationToken)
         {

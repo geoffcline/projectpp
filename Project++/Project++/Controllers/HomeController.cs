@@ -16,10 +16,13 @@ namespace Project__.Controllers
 
             var model = new UsersVM();
             int? userId = (int?)Session["LoginId"];
-            model.Group = db.Projects.FirstOrDefault(p => p.ProjectID == 2);
+            model.GroupId = (int?)Session["GroupId"];
+            model.UserId = userId;
             model.GroupMemberList = db.GroupMembers.ToList();
             model.Users = db.Users.FirstOrDefault(u => u.UserID == userId);
-            model.Chat = db.Chats.ToList();
+            model.GroupList = db.Projects.ToList();
+            model.TaskList = db.Tasks.OrderBy(tl => tl.DueDate).ToList();
+
 
             return View("Index", model);
         }
@@ -45,6 +48,26 @@ namespace Project__.Controllers
             }
             
             
+        }
+        public void CreateNewTask()
+        {
+
+            int userid = (int)Session["LoginId"];
+            var taskname = (string.IsNullOrEmpty(Request.Form["taskname"]) ? null : Request.Form["taskname"]);
+            int groupid = int.Parse(Request.Form["groupid"]);
+            var description = (string.IsNullOrEmpty(Request.Form["description"]) ? null : Request.Form["description"]);
+            var duedate = DateTime.Parse(Request.Form["duedate"]);
+
+            var tasks = new Tasks();
+            tasks.GroupID = groupid;
+            tasks.TaskName = taskname;
+            tasks.AssignedUserID = userid;
+            tasks.CreatedDate = DateTime.Now;
+            tasks.DueDate = duedate;
+            tasks.Description = description;
+
+            db.Tasks.Add(tasks);
+            db.SaveChanges();
         }
     }
 

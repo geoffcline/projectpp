@@ -11,6 +11,7 @@ namespace Project__.Models
         public User Users { get; set; }
         public List<Chat> Chat { get; set; }
         public Event Events { get; set; }
+        public List<Event> EventList { get; set; }
         public Projects Group { get; set; }
         public List<Projects> GroupList { get; set; }
         public List<GroupMember> GroupMemberList { get; set; }

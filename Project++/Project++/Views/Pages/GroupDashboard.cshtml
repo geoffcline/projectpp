@@ -26,7 +26,8 @@
                 <div class="meta">
                     @Model.Group.Name
                 </div>
-                <div class="description">Testing
+                <div class="description">
+                    @Model.Group.Description
                 </div>
             </div>
         </div>
@@ -60,7 +61,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        menuchange(1);
+        menuchange(2);
         $('#calendar').fullCalendar({
             height: 400
         });
