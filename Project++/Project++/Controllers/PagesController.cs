@@ -344,7 +344,7 @@ namespace Project__.Controllers
             var groupmember = new GroupMember();
             groupmember = db.GroupMembers.FirstOrDefault(gm => gm.UserName == username);
 
-            groupmember
+            
         }
     }
 }
