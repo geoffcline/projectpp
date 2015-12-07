@@ -28,7 +28,7 @@
 </script>
 
 <div class="ui grid">
-    <div class="four wide column">
+    <div class="three wide column">
         <div class="ui card">
             <div class="image">
                 <img src="~/Content/images/avatar@(Model.Users.Avatar_Num).png" style="max-height: 100%; max-width: 100%;"/>
@@ -43,25 +43,42 @@
             </div>
         </div>
         <div class="ui raised teal segment">
-            Groups<br />
-            @foreach(var grouplist in Model.GroupMemberList)
-            {
-                if(grouplist.UserID == (int)Session["LoginId"])
+            <div class="ui two column grid">
+                <h5>Groups</h5>
+                @foreach (var grouplist in Model.GroupMemberList)
                 {
-                    <a href="/Pages/GroupDashboard">@grouplist.GroupName</a><div class="ui radio checkbox"><input type="radio" name="check" checked="checked" /><label></label></div><br />
+                    if (grouplist.UserID == (int)Session["LoginId"])
+                    {
+                        <div class="row">
+                            <div class="column">
+                                <a href="/Pages/GroupDashboard">@grouplist.GroupName</a><br />
+                            </div>
+                            <div class="column">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="check" checked="checked"/>
+                                    <label></label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    }
                 }
-            }
+            </div>
+            <div class="six wide column">
+
+            </div>
+            
         </div>
     </div>
-    <div class="twelve wide column">
+    <div class="thirteen wide column">
         <div class="ui teal raised segment">
-            <h4>Task</h4>
+            <h4>Tasks</h4>
             <div class="ui grid">
                 <div class="eleven wide column">
                         <table class="ui teal celled table">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
+                                    <th>Assigned To</th>
                                     <th>Description</th>
                                     <th>Due Date</th>
                                     <th>Group</th>
@@ -102,7 +119,7 @@
                             <div class="ui divider"></div>
                             <div class="ui form">
                                 <div class="field">
-                                    <label>Name</label>
+                                    <label>Assign To</label>
                                     <input type="text" name="taskname" />
                                 </div>
                                 <div class="field">

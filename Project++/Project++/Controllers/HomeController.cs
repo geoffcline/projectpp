@@ -21,7 +21,7 @@ namespace Project__.Controllers
             model.GroupMemberList = db.GroupMembers.ToList();
             model.Users = db.Users.FirstOrDefault(u => u.UserID == userId);
             model.GroupList = db.Projects.ToList();
-            model.TaskList = db.Tasks.OrderBy(tl => tl.DueDate).ToList();
+            model.TaskList = db.Tasks.OrderByDescending(tl => tl.DueDate).ToList();
 
 
             return View("Index", model);

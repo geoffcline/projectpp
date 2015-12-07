@@ -1,4 +1,12 @@
 ﻿@model Project__.Models.UsersVM
+@using Newtonsoft.Json;
+
+<script type="text/javascript">
+    function ChangeCalendar() {
+        $('#calendar').hide();
+        $('#calendar2').show();
+    };
+</script>
 
 
 <div class=" ui grid">
@@ -37,13 +45,14 @@
                                     <input type="text" id="datepicker" size="32" />
                                 </div>
                             </div>
-                            <div class="ui orange submit button">Create</div>
+                            <div class="ui orange submit button" onclick="ChangeCalendar()">Create</div>
                         </div>
                     </div>
                 </div>
                 <div class="eleven wide column">
                     <div class="ui raised teal segment">
                         <div id='calendar'></div>
+                        <div id='calendar2' style="display: none"></div>
                     </div>
                 </div>
             </div>
@@ -54,18 +63,14 @@
 <script type="text/javascript">
     $(document).ready(function () {
         menuchange(4);
-        var events = [];
-
-        @
-        {
-            var events = [];
-            @foreach (var g in Model.EventList)
-            { events.add() }
-        }
-
         $('#calendar').fullCalendar({
             height: 600,
-                
+            events: [{ title: 'First', start : '2015-12-8'}]
+
+        });
+        $('#calendar2').fullCalendar({
+            height: 600
+
         });
     });
 </script>

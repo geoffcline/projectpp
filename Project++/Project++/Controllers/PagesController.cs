@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-
+using System.Collections.Generic;
 using Google.Apis.Auth.OAuth2.Mvc;
 using Google.Apis.Drive.v2;
 using Google.Apis.Services;
@@ -82,6 +82,14 @@ namespace Project__.Controllers
         {
             var model = new UsersVM();
             model.EventList = db.Events.ToList();
+             List<string> events = new List<string>();
+
+            foreach(var e in model.EventList)
+            {
+                string eventstring = "title : '" + e.EventName + "',start : '" + e.StartTime + "'";
+                events.Add(eventstring);
+            }
+            ViewData["events"] = events;
 
             return View(model);
         }

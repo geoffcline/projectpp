@@ -91,6 +91,7 @@ namespace Project__.Models
     public class Tasks
     {
         [Key]
+        public int TaskId { get; set; }
         public string TaskName { get; set; }
         public int? GroupID { get; set; }
         public int AssignedUserID { get; set; }
