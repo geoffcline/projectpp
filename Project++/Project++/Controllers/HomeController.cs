@@ -18,7 +18,7 @@ namespace Project__.Controllers
             int? userId = (int?)Session["LoginId"];
             model.GroupId = (int?)Session["GroupId"];
             model.UserId = userId;
-            model.GroupMemberList = db.GroupMembers.ToList();
+            model.GroupMemberList = db.GroupMembers.Where(li => li.GroupID <= 9).ToList();
             model.Users = db.Users.FirstOrDefault(u => u.UserID == userId);
             model.GroupList = db.Projects.ToList();
             model.TaskList = db.Tasks.OrderByDescending(tl => tl.DueDate).ToList();

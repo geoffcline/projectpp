@@ -67,6 +67,7 @@ namespace Project__.Models
         public string Name { get; set; }
         public int TeamLeaderID { get; set; }
         public string Description { get; set; }
+        public string ImageUrl { get; set; }
     }
 
     public class GroupMember
@@ -76,6 +77,8 @@ namespace Project__.Models
         public int UserID { get; set; }
         public string UserTitle { get; set; }
         public string GroupName { get; set; }
+        public DateTime RegisterDate { get; set; }
+        public string UserName { get; set; }
     }
 
     public class Log

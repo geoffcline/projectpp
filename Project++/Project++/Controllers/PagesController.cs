@@ -46,7 +46,10 @@ namespace Project__.Controllers
         }
         public ActionResult ManageGroup()
         {
-            return View();
+            var model = new UsersVM();
+            model.Group = db.Projects.FirstOrDefault(p => p.ProjectID == 22);
+            model.GroupMemberList = db.GroupMembers.Where(g => g.GroupID >= 9).ToList();
+            return View(model);
         }
         public ActionResult CreateGroup()
         {
@@ -307,11 +310,47 @@ namespace Project__.Controllers
                 model.Group = db.Projects.FirstOrDefault(p => p.ProjectID == groupid);
                 Session["GroupId"] = model.Group.ProjectID;
             }
-            
-            
+        }
+        public void GroupName()
+        {
+            string groupname = Request.Form["groupname"];
+            var group = new Projects();
+            group = db.Projects.FirstOrDefault(p => p.ProjectID == 22);
+            group.Name = groupname;
+            db.SaveChanges();
+        }
+        public void ImageUrl()
+        {
+            string imageurl = Request.Form["imageurl"];
+            var group = new Projects();
+            group = db.Projects.FirstOrDefault(p => p.ProjectID == 22);
+            group.ImageUrl = imageurl;
+            db.SaveChanges();
+        }
+        public void NewUser()
+        {
+            var groupmember = new GroupMember();
+            groupmember.UserID = 1;
+            groupmember.UserTitle = "djt3md@mst.edu";
+            groupmember.GroupName = "Project++";
+            groupmember.UserName = "David Tutt";
+            groupmember.RegisterDate = DateTime.Now;
+            db.GroupMembers.Add(groupmember);
+            db.SaveChanges();
+        }
+        public void RemoveUser()
+        {
+            string username = Request.Form["removeuser"];
+            var groupmember = new GroupMember();
+            groupmember = db.GroupMembers.FirstOrDefault(gm => gm.UserName == username);
+
+            groupmember
         }
     }
 }
+
+
+
 public class AuthCallbackController : Google.Apis.Auth.OAuth2.Mvc.Controllers.AuthCallbackController
 {
     protected override FlowMetadata FlowData

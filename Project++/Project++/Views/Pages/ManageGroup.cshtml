@@ -1,10 +1,57 @@
-﻿
+﻿@model Project__.Models.UsersVM
+
+<script type="text/javascript">
+    function GroupName() {
+        var params = '';
+        params += $('#settings').serialize();
+        $.ajax({
+            url: '@Url.Action("GroupName")',
+            method: 'POST',
+            data: params,
+            complete: location.reload()
+
+        });
+    };
+    function ImageUrl() {
+        var params = '';
+        params += $('#settings').serialize();
+        $.ajax({
+            url: '@Url.Action("ImageUrl")',
+            method: 'POST',
+            data: params,
+            complete: location.reload()
+
+        });
+    };
+    function NewUser() {
+        var params = '';
+        params += $('#settings').serialize();
+        $.ajax({
+            url: '@Url.Action("NewUser")',
+            method: 'POST',
+            data: params,
+            complete: location.reload()
+
+        });
+    };
+    function RemoveUser() {
+        var params = '';
+        params += $('#members').serialize();
+        $.ajax({
+            url: '@Url.Action("RemoveUser")',
+            method: 'POST',
+            data: params,
+            complete: location.reload()
+
+        });
+    };
+</script>
 
 <div class="ui grid">
     <div class="three wide column">
         <div class="ui card">
             <div class="image">
-                <img src="~/Content/images/wombat.jpg" style="max-height: 100%; max-width: 100%;" />
+                <img src="@Model.Group.ImageUrl" style="max-height: 100%; max-width: 100%;" />
             </div>
             <div class="content">
                 Project++
@@ -19,136 +66,84 @@
     </div>
     <div class="thirteen wide column">
         <div class="ui teal raised segment">
-            <h2>Group Settings:</h2>
-            <table class="ui celled striped table">
-                <tbody>
-                    <tr>
-                        <td class="collapsing">
-                            <i class="group icon"></i> Group Name
-                        </td>
-                        <td><div class="ui input"><input type="text" /></div></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <i class="file image outline icon"></i> Photo URL
-                        </td>
-                        <td><div class="ui input"><input type="text" /></div></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <i class="folder icon"></i> build
-                        </td>
-                        <td>Initial commit</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <i class="file outline icon"></i> package.json
-                        </td>
-                        <td>Initial commit</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <i class="file outline icon"></i> Gruntfile.js
-                        </td>
-                        <td>Initial commit</td>
-                    </tr>
-                </tbody>
-            </table>
+            <form name="settings" id="settings">
+                <h2>Group Settings:</h2>
+                <table class="ui celled striped table">
+                    <tbody>
+                        <tr>
+                            <td class="collapsing">
+                                <i class="group icon"></i> Group Name
+                            </td>
+                            <td><div class="ui input"><input type="text" name="groupname" value="@Model.Group.Name"/></div>
+                            <div class="ui orange submit button" onclick="GroupName()">Update</div></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="file image outline icon"></i> Photo URL
+                            </td>
+                            <td><div class="ui input"><input type="text" name="imageurl" value="@Model.Group.ImageUrl" /></div>
+                            <div class="ui orange submit button" onclick="ImageUrl()">Update</div></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="comment icon"></i> Group Tag
+                            </td>
+                            <td><div class="ui input"><input type="text" name="grouptag" value="Wild Wombats" /></div>
+                            <div class="ui orange submit button" onclick="GroupTag()">Update</div></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="folder icon"></i> Google Drive Folder
+                            </td>
+                            <td><div class="ui input"><input type="text" name="drivefolder" value="Software Engineering Project" /></div>
+                            <div class="ui orange submit button" onclick="DriveFolder()">Update</div></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="add user icon"></i> Add Member By Email
+                            </td>
+                            <td><div class="ui input"><input type="text" name="newuser" /></div>
+                            <div class="ui orange submit button" onclick="NewUser()">Add Member</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
         </div>
         <div class="ui teal raised segment">
-            <h2>Team Members:</h2>
-            <table class="ui compact celled table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Registration Date</th>
-                        <th>E-mail address</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Colin Eyster</td>
-                        <td>11/15/2015</td>
-                        <td>cjegy9@mst.edu</td>
-                        <td>
-                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Scott Perryman</td>
-                        <td>11/15/2015</td>
-                        <td>stpfz6@mst.edu</td>
-                        <td>
-                            <div class="ui right floated small labeled icon fluid button">
-                                <i class="user icon"></i> Remove User
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Alex Marey</td>
-                        <td>11/15/2015</td>
-                        <td>armv26@mst.edu</td>
-                        <td>
-                            <div class="ui right floated small labeled icon fluid button">
-                                <i class="user icon"></i> Remove User
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Geoffrey Cline</td>
-                        <td>11/15/2015</td>
-                        <td>gdcwd5@mst.edu</td>
-                        <td>
-                            <div class="ui right floated small labeled icon fluid button">
-                                <i class="user icon"></i> Remove User
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Tyler Percy</td>
-                        <td>11/15/2015</td>
-                        <td>tcphw5@mst.edu</td>
-                        <td>
-                            <div class="ui right floated small labeled icon fluid button">
-                                <i class="user icon"></i> Remove User
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Tyler Percy</td>
-                        <td>11/15/2015</td>
-                        <td>tcphw5@mst.edu</td>
-                        <td>
-                            <div class="ui right floated small labeled icon fluid button">
-                                <i class="user icon"></i> Remove User
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Tyler Percy</td>
-                        <td>11/15/2015</td>
-                        <td>tcphw5@mst.edu</td>
-                        <td>
-                            <div class="ui right floated small labeled icon fluid button">
-                                <i class="user icon"></i> Remove User
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot class="full-width">
-                    <tr>
-                        <th colspan="4">
-                            <div class="ui right floated small primary labeled icon fluid button">
-                                <i class="user icon"></i> Add User
-                            </div>
-
-                        </th>
-                    </tr>
-                </tfoot>
-            </table>
-            </div>
-
+            <form name="members" id="members">
+                <h2>Team Members:</h2>
+                <table class="ui compact celled table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Registration Date</th>
+                            <th>E-mail address</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var gm in Model.GroupMemberList)
+                        {
+                            <tr>
+                                <td>
+                                    @gm.UserName
+                                </td>
+                                <td>
+                                    @gm.RegisterDate.ToString("MM/dd/yyyy")
+                                </td>
+                                <td>
+                                    @gm.UserTitle
+                                </td>
+                                <td>
+                                    <div class="ui right floated small labeled icon fluid button" onclick="RemoveUser()" name="removeuser" value="@gm.UserName" style="@(gm.UserName == "Colin Eyster" ? "display: none" : "")">
+                                        <i class="user icon"></i> Remove User
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </form>
         </div>
     </div>
 </div>
