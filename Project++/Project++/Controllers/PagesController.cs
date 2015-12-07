@@ -33,25 +33,18 @@ namespace Project__.Controllers
             model.UserId = (int?)Session["LoginId"];
             model.Users = db.Users.FirstOrDefault(u => u.UserID == model.UserId);
             model.Group = db.Projects.FirstOrDefault(g => g.ProjectID == model.GroupId);
-
-            if(model.GroupId == null)
-            {
-                return RedirectToAction("CreateGroup", new { nogroup = true });
-            }
-            else
-            {
-                return View(model);
-            }
+            
+            return View(model);
+            
         }
         public ActionResult ManageGroup()
         {
             return View();
         }
-        public ActionResult CreateGroup(bool nogroup)
+        public ActionResult CreateGroup()
         {
-            var model = new UsersVM();
-            model.HasGroup = nogroup;
-            return View(model);
+            
+            return View();
         }
         public ActionResult Task()
         {

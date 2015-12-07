@@ -38,7 +38,7 @@
             {
                 if(grouplist.UserID == (int)Session["LoginId"])
                 {
-                    <a href="/Pages/GroupDashboard">@grouplist.GroupName</a>
+                    <a href="/Pages/GroupDashboard">@grouplist.GroupName</a><br />
                 }
             }
         </div>
@@ -46,16 +46,6 @@
     <div class="eight wide column">
         <div class="ui teal raised segment">
             Tasks
-        </div>
-        <div class="ui teal raised segment">
-            <form name="messageform" id="messageform">
-                <div id="chatbox"></div>
-                <div class="ui input">
-                    New Message <br />
-                    <input name="newmessage" id="newmessage" rows="2">
-                </div>
-            </form>
-            <div class="ui orange button" style="margin-top: 5px" onclick="Message()">Send</div>
         </div>
     </div>
     <div class="four wide column">
